@@ -12,10 +12,9 @@ composer install
 
 ```
 .
-+-- _config.yml
 +-- addons
-|   +-- begin-with-the-crazy-ideas.textile
-|   +-- on-simplicity-in-technology.markdown
+|   +-- diyform
+|   +-- temp
 +-- app
 |   +-- admin
 |   +-- common
@@ -42,4 +41,5 @@ composer install
 +-- delBom.php
 +-- index.php
 +-- robots.txt
++-- composer.json
 ```
