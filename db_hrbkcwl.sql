@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50553
 File Encoding         : 65001
 
-Date: 2018-05-27 22:18:41
+Date: 2018-05-28 11:02:31
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -90,12 +90,13 @@ CREATE TABLE `cool_admin` (
   `is_open` tinyint(2) DEFAULT '0' COMMENT '审核状态',
   PRIMARY KEY (`admin_id`),
   KEY `admin_username` (`username`)
-) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of cool_admin
 -- ----------------------------
 INSERT INTO `cool_admin` VALUES ('1', 'admin', '0192023a7bbd73250516f069df18b500', '1', '1109305987@qq.com', '', '18792402229', '127.0.0.1', '1482132862', '0', '1');
+INSERT INTO `cool_admin` VALUES ('9', 'wzs28150', '0192023a7bbd73250516f069df18b500', '3', '1003418012@qq.com', null, '18745170304', '127.0.0.1', '1527470238', '0', '0');
 
 -- ----------------------------
 -- Table structure for cool_ad_type
@@ -167,9 +168,9 @@ CREATE TABLE `cool_auth_group` (
 -- ----------------------------
 -- Records of cool_auth_group
 -- ----------------------------
-INSERT INTO `cool_auth_group` VALUES ('1', '超级管理员', '1', '0,1,2,270,15,16,119,120,121,145,17,149,116,117,118,181,151,18,108,114,112,109,110,111,3,5,126,128,127,4,230,232,129,189,190,193,192,240,239,241,243,244,245,242,246,7,9,14,234,13,235,236,237,238,27,29,161,163,164,162,38,167,182,169,166,28,48,247,248,31,32,249,250,251,45,170,171,175,174,173,46,176,183,179,178,265,196,197,202,198,252,253,254,255,256,203,205,204,257,206,207,212,208,213,258,259,260,261,262,209,215,214,263,210,217,216,264,211,266,267,269,', '1465114224');
-INSERT INTO `cool_auth_group` VALUES ('2', '管理员', '1', '1,15,16,120,146,40,41,7,8,12,139,11,136,154,137,138,135,25,140,141,142,9,13,157,158,159,160,155,14,156,27,29,37,161,163,164,162,38,167,182,168,169,165,166,35,36,39,28,31,32,33,34,44,45,170,171,172,173,174,175,46,176,183,177,178,179,48,49,', '1465114224');
-INSERT INTO `cool_auth_group` VALUES ('3', '商品管理员', '1', '27,29,37,161,163,164,162,38,167,182,168,169,165,166,', '1465114224');
+INSERT INTO `cool_auth_group` VALUES ('1', '超级管理员', '1', '0,276,1,2,270,15,16,119,120,121,145,17,149,116,117,118,181,151,18,108,114,112,109,110,111,3,5,128,127,126,4,230,232,129,27,29,161,163,164,162,38,167,182,169,166,28,48,247,248,31,32,249,250,251,45,170,171,175,174,173,46,176,183,179,178,265,206,207,212,208,213,258,259,260,261,262,209,215,214,263,210,217,216,264,211,266,277,189,190,193,192,240,239,241,243,244,245,242,246,274,275,7,9,14,234,13,235,236,237,238,280,196,197,202,198,252,253,254,255,256,203,205,204,257,272,278,267,279,281,282,', '1465114224');
+INSERT INTO `cool_auth_group` VALUES ('2', '管理员', '1', '1,15,16,120,146,40,41,7,8,12,139,11,136,154,137,138,135,25,140,141,142,9,13,157,158,159,160,155,14,156,27,29,37,161,163,164,162,38,167,182,168,169,165,166,35,36,39,28,31,32,33,34,44,45,170,171,172,173,174,175,46,176,183,177,178,179,48,49,281,282,', '1465114224');
+INSERT INTO `cool_auth_group` VALUES ('3', '文章管理员', '1', '27,29,161,163,164,162,38,167,182,169,166,277,189,190,193,192,240,239,241,243,244,245,242,246,7,9,14,234,13,235,236,237,238,', '1465114224');
 
 -- ----------------------------
 -- Table structure for cool_auth_rule
@@ -190,7 +191,7 @@ CREATE TABLE `cool_auth_rule` (
   `zt` int(1) DEFAULT NULL,
   `menustatus` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=281 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=283 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of cool_auth_rule
@@ -333,8 +334,8 @@ INSERT INTO `cool_auth_rule` VALUES ('267', 'Plugin/index', '插件管理', '1',
 INSERT INTO `cool_auth_rule` VALUES ('270', 'System/email', '邮箱配置', '1', '1', '0', '', '', '1', '2', '1502331829', '0', '1');
 INSERT INTO `cool_auth_rule` VALUES ('272', 'Debris/type', '碎片分类', '1', '1', '1', '', '', '196', '3', '1504082720', null, '1');
 INSERT INTO `cool_auth_rule` VALUES ('276', 'System', '系统', '1', '1', '1', 'icon-cogs', '', '0', '1', '1527305359', '1', '1');
-INSERT INTO `cool_auth_rule` VALUES ('274', 'Article', '内容管理', '1', '1', '1', 'icon-file-text2', '', '277', '4', '1510670765', null, '1');
-INSERT INTO `cool_auth_rule` VALUES ('275', 'Article/add', '添加内容', '1', '1', '1', '', '', '274', '50', '1510671169', null, '1');
+INSERT INTO `cool_auth_rule` VALUES ('274', 'Article', '内容管理', '1', '1', '1', 'icon-file-text2', '', '277', '4', '1510670765', null, '0');
+INSERT INTO `cool_auth_rule` VALUES ('282', 'page/index/catid/33.html', '测试', '1', '1', '0', null, '', '274', '0', '1527475970', null, null);
 INSERT INTO `cool_auth_rule` VALUES ('277', 'System', '内容', '1', '1', '1', 'icon-cogs', '', '0', '2', '1527311011', '1', '1');
 INSERT INTO `cool_auth_rule` VALUES ('278', 'System', '插件', '1', '1', '1', 'icon-cogs', '', '0', '4', '1527393444', null, '1');
 INSERT INTO `cool_auth_rule` VALUES ('279', 'Addons/index', '插件列表', '1', '1', '1', '', '', '267', '50', '1527393598', null, '1');
@@ -476,7 +477,7 @@ CREATE TABLE `cool_category` (
   PRIMARY KEY (`id`),
   KEY `parentid` (`parentid`),
   KEY `listorder` (`listorder`)
-) ENGINE=MyISAM AUTO_INCREMENT=31 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=34 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of cool_category
@@ -1117,7 +1118,7 @@ CREATE TABLE `cool_plus_seoinfo` (
   `sogou_count` varchar(50) DEFAULT NULL,
   `haosou360_count` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=40 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=41 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of cool_plus_seoinfo
@@ -1155,6 +1156,7 @@ INSERT INTO `cool_plus_seoinfo` VALUES ('36', '1525312602', '<span style=\'margi
 INSERT INTO `cool_plus_seoinfo` VALUES ('37', '1527304272', '<span style=\'margin-left: 10px;\'>-</span>', '0', '19', '7', '1', '1');
 INSERT INTO `cool_plus_seoinfo` VALUES ('38', '1527387119', '<span style=\'margin-left: 10px;\'>-</span>', '0', '19', '7', '1', '1');
 INSERT INTO `cool_plus_seoinfo` VALUES ('39', '1527409204', '<span style=\'margin-left: 10px;\'>-</span>', '0', '19', '6', '1', '1');
+INSERT INTO `cool_plus_seoinfo` VALUES ('40', '1527468808', '<span style=\'margin-left: 10px;\'>-</span>', '0', '19', '7', '1', '1');
 
 -- ----------------------------
 -- Table structure for cool_posid
@@ -4860,16 +4862,11 @@ CREATE TABLE `cool_visit_day` (
   `lang` varchar(50) NOT NULL DEFAULT '',
   `keystr` varchar(255) DEFAULT '',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=3267 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=3268 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of cool_visit_day
 -- ----------------------------
-INSERT INTO `cool_visit_day` VALUES ('1515', '111.206.221.41', '1519700876', 'http://www.hrbkcwl.com/', '', '0', '0', 'Safari', '', '', '', '56ab9f8fa438dd2485e29360ee827a12');
-INSERT INTO `cool_visit_day` VALUES ('1514', '112.103.96.150', '1519700558', 'http://www.hrbkcwl.com/', 'https://www.baidu.com/link?url=ovkSsNqJStyZvpyx0UEsxZDzeZbg0g-MU6QXgbyp5Y4DupPAZ5FPVxc8iSoviOpJ', '0', '0', 'Chrome', '', '', '', '4319ab992ff5fd0c09aaa00a48d8c3e9');
-INSERT INTO `cool_visit_day` VALUES ('1513', '112.103.96.150', '1519700384', 'http://www.hrbkcwl.com/', 'https://www.baidu.com/link?url=ovkSsNqJStyZvpyx0UEsxZDzeZbg0g-MU6QXgbyp5Y4DupPAZ5FPVxc8iSoviOpJ', '0', '0', 'Chrome', '', '', '', '4319ab992ff5fd0c09aaa00a48d8c3e9');
-INSERT INTO `cool_visit_day` VALUES ('1511', '111.206.198.105', '1519694240', 'http://www.hrbkcwl.com/', '', '0', '0', 'Safari', '', '', '', '56ab9f8fa438dd2485e29360ee827a12');
-INSERT INTO `cool_visit_day` VALUES ('1512', '220.181.108.104', '1519696841', 'http://www.hrbkcwl.com/', '', '0', '0', 'Safari', '', '', '', '56ab9f8fa438dd2485e29360ee827a12');
 INSERT INTO `cool_visit_day` VALUES ('2146', '123.165.251.30', '1522854628', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
 INSERT INTO `cool_visit_day` VALUES ('2145', '123.165.251.30', '1522854619', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
 INSERT INTO `cool_visit_day` VALUES ('2144', '123.165.251.30', '1522854612', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
@@ -5850,7 +5847,7 @@ INSERT INTO `cool_visit_day` VALUES ('3208', '111.41.173.109', '1527301398', 'ht
 INSERT INTO `cool_visit_day` VALUES ('3207', '220.181.108.116', '1527285135', 'http://www.hrbkcwl.com/', '', '0', '0', 'Safari', '', '', '', '56ab9f8fa438dd2485e29360ee827a12');
 INSERT INTO `cool_visit_day` VALUES ('3215', '127.0.0.1', '1527389614', 'http://coolphp.local.com/index.html', 'http://coolphp.local.com/admin/index/index.html', '0', '0', 'Chrome', '', '', '', 'b95a6bd3fdca360352b87616f4a981ff');
 INSERT INTO `cool_visit_day` VALUES ('3214', '127.0.0.1', '1527389224', 'http://coolphp.local.com/index.html', 'http://coolphp.local.com/admin/index/index.html', '0', '0', 'Chrome', '', '', '', 'b95a6bd3fdca360352b87616f4a981ff');
-INSERT INTO `cool_visit_day` VALUES ('1516', '111.206.221.8', '1519716267', 'http://www.hrbkcwl.com/blogInfo_8_17.html', '', '0', '0', 'Safari', '', '', '', '56ab9f8fa438dd2485e29360ee827a12');
+INSERT INTO `cool_visit_day` VALUES ('3267', '127.0.0.1', '1527468776', 'http://coolphp.local.com/', '', '0', '0', 'Chrome', '', '', '', 'b95a6bd3fdca360352b87616f4a981ff');
 INSERT INTO `cool_visit_day` VALUES ('2147', '123.165.251.30', '1522854632', 'http://www.hrbkcwl.com/services_13.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
 INSERT INTO `cool_visit_day` VALUES ('2148', '123.165.251.30', '1522854637', 'http://www.hrbkcwl.com/blog_14.html', 'http://www.hrbkcwl.com/services_13.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
 INSERT INTO `cool_visit_day` VALUES ('2149', '123.165.251.30', '1522854639', 'http://www.hrbkcwl.com/contact_16.html', 'http://www.hrbkcwl.com/blog_14.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
@@ -6640,7 +6637,7 @@ CREATE TABLE `cool_visit_detail` (
   `stattime` int(11) NOT NULL,
   `lang` varchar(50) NOT NULL DEFAULT '',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=752 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=753 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of cool_visit_detail
@@ -7374,6 +7371,7 @@ INSERT INTO `cool_visit_detail` VALUES ('748', 'http://coolphp.local.com/index.h
 INSERT INTO `cool_visit_detail` VALUES ('749', 'http://coolphp.local.com/about_2.html', '7', '1', '1', '0', '', '0', '0', '0', '1527350400', '');
 INSERT INTO `cool_visit_detail` VALUES ('750', 'http://coolphp.local.com/', '2', '1', '1', '0', '', '0', '0', '0', '1527350400', '');
 INSERT INTO `cool_visit_detail` VALUES ('751', 'http://coolphp.local.com/index_index.html', '2', '1', '1', '0', '', '0', '0', '0', '1527350400', '');
+INSERT INTO `cool_visit_detail` VALUES ('752', 'http://coolphp.local.com/', '1', '1', '1', '0', '', '0', '0', '0', '1527436800', '');
 
 -- ----------------------------
 -- Table structure for cool_visit_summary

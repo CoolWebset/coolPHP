@@ -111,6 +111,31 @@ class Category extends Common
                 $data['status']= '1';
                 $Attachment->where("aid in (".$aids.")")->updata($data);
             }
+            //更新权限管理  href catid pid   title
+            $data3['catid'] = $id;
+            if ($data['parentid']) {
+                $rul = db('auth_rule')->field('id')->where('catid', $data['parentid'])->find();
+                $data3['pid'] = $rul['id'];
+            } else {
+                $data3['pid'] = 274;
+            }
+            $data3['title'] = $data['catname'];
+            $data3['href'] = $data['module'] . '/index/catid/' . $id . '.html';
+            $data3['addtime'] = time();
+            $data3['authopen'] = 0;
+            $authrule = db('auth_rule');
+            $authid = $authrule->insertGetId($data3);
+
+            //更新权限組 auth_group
+            $authgroup = db('auth_group');
+            $authgroup->where('group_id','in','1,2')->update(['rules' => ['exp','CONCAT(rules,"' . $authid . ',")'],]);
+            // if($data['aid']) {
+            //     $Attachment =db('Attachment');
+            //     $aids =  implode(',',$data['aid']);
+            //     $data['status']= '1';
+            //     $Attachment->where("aid in (".$aids.")")->updata($data);
+            // }
+            //echo $authgroup->getLastSql();
             $this->repair();
             savecache('Category');
             $result['msg'] = '栏目添加成功!';
