@@ -14,8 +14,8 @@ layui.config({
   tab = layui.tab({
     elem: '.admin-nav-card', //设置选项卡容器
     maxSetting: {
-      max: 5,
-      tipMsg: '为了系统的流畅度，只能同时打开5个选项卡。'
+      max: 10,
+      tipMsg: '为了系统的流畅度，只能同时打开10个选项卡。'
     },
     contextMenu: true,
     onSwitch: function(data) {},
