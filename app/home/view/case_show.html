@@ -1,0 +1,40 @@
+<style media="screen">
+	.portfolio-details img{ max-width: 100%; height: auto;}
+</style>
+<div class="detail-img">
+    <!-- Portfolio Slider -->
+    <div class="cbp-slider">
+        <ul class="cbp-slider-wrap">
+            {volist name=":getzutu($info['bannerzutu'])" id="vo"}
+            <li class="cbp-slider-item"> <img class="img-responsive" src="{:imgUrl($vo)}" alt=""> </li>
+            {/volist}
+        </ul>
+    </div>
+</div>
+
+<div class="container">
+    <!-- Portfolio Details -->
+    <section class="portfolio-details">
+
+        <!-- Project Detail -->
+        <div class="padding-top-100 padding-bottom-100">
+            <div class="container">
+
+                <!-- Heading -->
+                <div class="text-center margin-bottom-30">
+                    <h4>{$info.title}</h4>
+                    <hr class="margin-bottom-40"> {$info.content}
+                </div>
+
+                <!-- Project Info -->
+                <div class="text-center">
+                    <ul class="projext-info">
+                        <li><span>客户 - </span>{$info.kehu}</li>
+                        <li><span>技术 - </span> {$info.jishu}</li>
+                        <li><span>日期   - </span>{:toDate($info['createtime'],'Y-m-d')}</li>
+                    </ul>
+                    <a href="#." class="btn-1 btn-2 margin-top-50">查看项目<i class="fa fa-plus"></i></a> </div>
+            </div>
+        </div>
+    </section>
+</div>

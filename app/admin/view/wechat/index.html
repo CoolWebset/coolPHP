@@ -1,0 +1,107 @@
+{include file="common/head"/}
+<div class="admin-main layui-anim layui-anim-upbit">
+    <fieldset class="layui-elem-field layui-field-title">
+        <legend>公众号管理</legend>
+    </fieldset>
+
+    <form class="layui-form layui-form-pane">
+        <div class="layui-form-item">
+            <label class="layui-form-label">服务器地址</label>
+            <div class="layui-input-4">
+                <input type="text" value="{$apiurl}" readonly class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">公众号名称</label>
+            <div class="layui-input-4">
+                <input type="text" lay-verify="required" name="wxname" value="{$info.wxname}" placeholder="{:lang('pleaseEnter')}公众号名称" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">原始ID</label>
+            <div class="layui-input-4">
+                <input type="text" name="wxid" value="{$info.wxid}" lay-verify="required" placeholder="{:lang('pleaseEnter')}公众号原始ID" class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">微信号</label>
+            <div class="layui-input-4">
+                <input type="text" name="weixin" value="{$info.weixin}" lay-verify="required" placeholder="{:lang('pleaseEnter')}微信号" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">AppID</label>
+            <div class="layui-input-3">
+                <input type="text" name="appid" value="{$info.appid}" lay-verify="required" placeholder="{:lang('pleaseEnter')}AppID" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">AppSecret</label>
+            <div class="layui-input-3">
+                <input type="text" name="appsecret" value="{$info.appsecret}" lay-verify="required" placeholder="{:lang('pleaseEnter')}AppSecret" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">Token</label>
+            <div class="layui-input-3">
+                <input type="text" name="w_token" value="{$info.w_token}" lay-verify="required" placeholder="{:lang('pleaseEnter')}Token" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">微信号类型</label>
+            <div class="layui-input-3">
+                <select name="type">
+                    <option {if condition="$info['type'] eq 1"}selected{/if} value="1">订阅号</option>
+                    <option {if condition="$info['type'] eq 2"}selected{/if} value="2">认证订阅号</option>
+                    <option {if condition="$info['type'] eq 3"}selected{/if} value="3">服务号</option>
+                    <option {if condition="$info['type'] eq 4"}selected{/if} value="4">认证服务号</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">接入状态</label>
+            <div class="layui-input-block">
+                <input type="radio" name="wait_access" lay-filter="open" {if condition="$info['wait_access'] eq 0"}checked="checked"{/if} value="0" title="等待接入">
+                <input type="radio" name="wait_access" lay-filter="open" {if condition="$info['wait_access'] eq 1"}checked="checked"{/if} value="1" title="已接入">
+            </div>
+        </div>
+        <div class="layui-form-item layui-form-text">
+            <label class="layui-form-label">关注回复</label>
+            <div class="layui-input-block">
+                <textarea name="concern" placeholder="{:lang('pleaseEnter')}关注回复" class="layui-textarea">{$info.concern}</textarea>
+            </div>
+        </div>
+        <div class="layui-form-item layui-form-text">
+            <label class="layui-form-label">默认回复</label>
+            <div class="layui-input-block">
+                <textarea name="default" placeholder="{:lang('pleaseEnter')}默认回复" class="layui-textarea">{$info.default}</textarea>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button type="button" class="layui-btn" lay-submit="" lay-filter="submit">立即提交</button>
+                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+            </div>
+        </div>
+    </form>
+</div>
+{include file="common/foot"/}
+<script>
+    layui.use('form', function () {
+        var form = layui.form,$ = layui.jquery;
+        form.on('submit(submit)', function (data) {
+            var loading = layer.load(1, {shade: [0.1, '#fff']});
+            $.post("{:url('weixin')}",data.field,function(res){
+                layer.close(loading);
+                if(res.code > 0){
+                    layer.msg(res.msg,{time:1000,icon:1},function(){
+                        location.href = "{:url('index')}";
+                    });
+                }else{
+                    layer.msg(res.msg,{time:1000,icon:2});
+                }
+            });
+        })
+    })
+</script>

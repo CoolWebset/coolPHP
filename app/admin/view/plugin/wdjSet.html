@@ -1,0 +1,82 @@
+{include file="common/head"/}
+<div class="admin-main layui-anim layui-anim-upbit">
+    <fieldset class="layui-elem-field layui-field-title">
+        <legend>{$title}</legend>
+    </fieldset>
+    <form class="layui-form layui-form-pane">
+        <input type="hidden" name="type" value="{:input('type')}">
+        <input type="hidden" name="code" value="{:input('code')}"> {volist name="info.config" id="vo"}
+        <div class="layui-form-item">
+            <label class="layui-form-label">{$vo.label}</label>
+            <div class="layui-input-4">
+                {if condition="$vo['type'] eq 'select'"}
+                <select name="config[{$vo['name']}]" class="col-select col-xs-12 col-md-3 selector">
+                    {volist name="vo.option" id="option" key="o"}
+                    <option {if condition="$config_value[$vo['name']] eq $o"}selected{/if}  value="{$o}">{$option}</option>
+                    {/volist}
+                </select> {elseif condition="$vo['type'] eq 'textarea'"/}
+                <textarea lay-verify="required" name="config[{$vo['name']}]" placeholder="{:lang('pleaseEnter')}{$vo.label}" class="layui-textarea">{$config_value[$vo['name']]}</textarea>                {elseif condition="$vo['type'] eq 'image'"/}
+                <input type="hidden" name="config[{$vo['name']}]" id="thumb" value="">
+                <div class="layui-upload"><button type="button" class="layui-btn layui-btn-primary" id="thumbBtn"><i class="icon icon-upload3"></i>点击上传</button>
+                    <input class="layui-upload-file" type="file" name="file">
+                    <div class="layui-upload-list">
+                        <img class="layui-upload-img" id="cltThumb" src="__PUBLIC__{$config_value[$vo['name']]}">
+                        <p id="thumbText"></p>
+                    </div>
+                </div>
+                {else /}
+                <input type="{$vo['type']}" name="config[{$vo['name']}]" value="{$config_value[$vo['name']]}" lay-verify="required" placeholder="{:lang('pleaseEnter')}{$vo.label}"
+                    class="layui-input"> {/if}
+            </div>
+        </div>
+        {/volist}
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button type="button" class="layui-btn" lay-submit="" lay-filter="submit">{:lang('submit')}</button>
+                <a href="{:url('login')}" class="layui-btn layui-btn-primary">{:lang('back')}</a>
+            </div>
+        </div>
+    </form>
+</div>
+{include file="common/foot"/}
+<script>
+    layui.use(['form', 'upload', 'layer'], function () {
+        var form = layui.form,
+            $ = layui.jquery,
+            upload = layui.upload;
+        upload.render({
+            elem: '#thumbBtn',
+            url: '{:url("UpFiles/upload")}',
+            accept: 'images' //普通文件
+                ,
+            exts: 'jpg|png|gif' //只允许上传压缩文件
+                ,
+            done: function (res) {
+                console.log(res);
+                $('#cltThumb').attr('src', "__PUBLIC__" + res.url);
+                $('#thumb').val(res.url);
+            }
+        });
+        form.on('submit(submit)', function (data) {
+            loading = layer.load(1, {
+                shade: [0.1, '#fff']
+            });
+            $.post("{:url('paySetUp')}", data.field, function (res) {
+                layer.close(loading);
+                if (res.code > 0) {
+                    layer.msg(res.msg, {
+                        time: 1800,
+                        icon: 1
+                    }, function () {
+                        location.href = res.url;
+                    });
+                } else {
+                    layer.msg(res.msg, {
+                        time: 1800,
+                        icon: 2
+                    });
+                }
+            });
+        })
+    });
+</script>

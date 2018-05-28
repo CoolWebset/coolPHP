@@ -1,0 +1,53 @@
+{include file="common/head"/}
+<div class="admin-main layui-anim layui-anim-upbit">
+    <fieldset class="layui-elem-field layui-field-title">
+        <legend>文本回复</legend>
+    </fieldset>
+    <blockquote class="layui-elem-quote">
+        <a href="{:url('addText')}" class="layui-btn layui-btn-small">{:lang('add')}文本回复</a>
+    </blockquote>
+    <table class="layui-table" id="list" lay-filter="list"></table>
+</div>
+{include file="common/foot"/}
+<script type="text/html" id="action">
+    <a href="{:url('editText')}?id={{d.id}}" class="layui-btn layui-btn-xs">编辑</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
+<script>
+    layui.use('table', function() {
+        var table = layui.table;
+        $ = layui.jquery;
+        var tableIn = table.render({
+            id: 'menu',
+            elem: '#list',
+            url: '{:url("text")}',
+            method: 'post',
+            page:true,
+            cols: [[
+                {field: 'id', title: '{:lang("id")}', width: 80, fixed: true},
+                {field: 'keyword', title: '关键词', width: 120, templet: '#name'},
+                {field: 'text', title: '回复', width: 400},
+                {width: 160, align: 'center', toolbar: '#action', title: '操作'}
+            ]],
+            limit:10
+        });
+        table.on('tool(list)', function(obj) {
+            var data = obj.data;
+            if(obj.event === 'del'){
+                layer.confirm('您确定要删除该内容吗？', function(index){
+                    var loading = layer.load(1, {shade: [0.1, '#fff']});
+                    $.post("{:url('delText')}",{id:data.id},function(res){
+                        layer.close(loading);
+                        if(res.code===1){
+                            layer.msg(res.msg,{time:1000,icon:1});
+                            tableIn.reload();
+                        }else{
+                            layer.msg('操作失败！',{time:1000,icon:2});
+                        }
+                    });
+                    layer.close(index);
+                });
+            }
+        });
+    });
+</script>

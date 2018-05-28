@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>微店金</title>
+  <link rel="stylesheet" href="__STATIC__/wdj/lib/weui.min.css">
+  <link rel="stylesheet" href="__STATIC__/wdj/css/jquery-weui.css">
+  <link rel="stylesheet" href="__STATIC__/wdj/css/demos.css">
+</head>
+
+<body ontouchstart>
+
+  <header class='demos-header'>
+    <h1 class="demos-title">cool 微店金</h1>
+    <p class='demos-sub-title'>轻量的广告发布平台</p>
+  </header>
+
+  <div class="weui-cells__title">请将新闻的网址粘贴到下方</div>
+  <div class="weui-cells">
+    <div class="weui-cell">
+      <div class="weui-cell__bd">
+        <input class="weui-input" type="text" id="url" style="ime-mode: disabled" placeholder="">
+      </div>
+    </div>
+  </div>
+  <label for="weuiAgree" class="weui-agree">
+            <input id="weuiAgree" type="checkbox" class="weui-agree__checkbox">
+            <span class="weui-agree__text">
+              阅读并同意<a href="javascript:void(0);">《相关条款》</a>
+            </span>
+          </label>
+
+  <div class="weui-btn-area">
+    <a class="weui-btn weui-btn_primary" href="javascript:" id="submit">确定</a>
+  </div>
+  <div class="weui-footer weui-footer_fixed-bottom">
+    <p class="weui-footer__links">
+      <a href="#." class="weui-footer__link">cool 微店金</a>
+    </p>
+    <p class="weui-footer__text">Copyright © 2017 hrbkcwl.com</p>
+  </div>
+
+  <style>
+    .weui-footer {
+      margin: 25px 0 10px 0;
+    }
+  </style>
+
+
+  <script src="__STATIC__/wdj/lib/jquery-2.1.4.js"></script>
+  <script src="__STATIC__/wdj/lib/fastclick.js"></script>
+  <script>
+    $(function () {
+      FastClick.attach(document.body);
+      $('#url').focus(function () {
+        $('.weui-footer').hide();
+      });
+      //输入框失去焦点事件
+      $('#url').blur(function () {
+        $('.weui-footer').show();
+      });
+      $('#submit').click(function () {
+        var url = $('#url').val();
+        arrData = {
+          'url': url
+        };
+        $.post("/weidianji_dourl", arrData,
+          function (data) {
+            if ('118' == data.err_code) {
+              location.href = "/weidianjishow_" + data.err_info;
+            } else {
+              alertinfo(data.err_info);
+
+            }
+          }, "json"
+        );
+      });
+    });
+  </script>
+  <script src="__STATIC__/wdj/js/jquery-weui.js"></script>
+</body>
+
+</html>

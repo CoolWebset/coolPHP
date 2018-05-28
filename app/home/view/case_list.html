@@ -1,0 +1,76 @@
+{include file="common/head"/}
+
+<section class="sub-bnr parallax-bg" data-stellar-background-ratio="0.5" style="background:url(__HOME__/images/bb2.jpg) no-repeat;">
+    <div class="container">
+        <div class="position-center-center">
+            <h3>项目展示</h3>
+
+            <!--======= Breadcrumb =========-->
+            <ol class="breadcrumb">
+                <li><a href="index.html">首页</a></li>
+                <li class="active">项目展示</li>
+            </ol>
+        </div>
+    </div>
+
+    <!-- GO DOWN -->
+    <div class="scroll"><a href="#content" class="go-down"><img src="__HOME__/images/go-down.png" alt=""></a></div>
+</section>
+
+<!-- Content -->
+<div id="content">
+
+    <!-- PORTFOLIO -->
+    <section class="padding-top-100 padding-bottom-100">
+        <div class="container-fluid">
+
+            <!-- PORTOFLIO ITEMS FILTER -->
+            <div class="text-center portfolio-filter margin-bottom-50">
+                <div id="ajax-work-filter" class="cbp-l-filters-buttonCenter">
+                    <div data-filter="*" class="cbp-filter-item-active cbp-filter-item"> 全部
+                        <div class="cbp-filter-counter"></div>
+                    </div>
+                    {volist name="listnav" id="v"}
+                    <div data-filter=".w{$v.id}" class="cbp-filter-item"> {$v.catname}
+                        <div class="cbp-filter-counter"></div>
+                    </div>
+                    {/volist}
+                </div>
+            </div>
+
+            <!-- PORTFOLIO ITEMS -->
+            <div class="ajax-work">
+                <div class="col-4 gallery">
+                    {volist name="$list" id="vo"}
+                    <!-- ITEM -->
+                    <div class="cbp-item item portfolio-item w{$vo.catid}">
+                        <div class="port-item"><img src="__PUBLIC__{$vo.thumb}" alt="">
+                            <div class="hover-info">
+                                <div class="hover-in">
+                                    <div class="position-center-center"><span>{:getcatname($vo['catid'])}</span>
+                                        <hr>
+                                        <h6>{$vo.title}</h6>
+                                        <a class="cbp-singlePage" href="{:url('home/'.$vo['catdir'].'/info',array('id'=>$vo['id'],'catId'=>$vo['catid']))}">
+                                            <i class="lnr lnr-link"></i>
+                                        </a>                                     
+                                        <a href="__PUBLIC__{$vo.thumb}" class="cbp-lightbox"><i class="lnr lnr-frame-expand"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {/volist}
+                </div>
+            </div>
+        </div>
+
+        <!-- UNDER PORTFOLIO -->
+        <div class="container-fluid">
+            <div class="under-port text-center">
+                <div id="ajax-loadMore"> <a href="/caseload" class="cbp-l-loadMore-link btn-1" rel="nofollow"> <span class="cbp-l-loadMore-defaultText">查看更多项目 <i class="fa fa-angle-down"></i></span> <span class="cbp-l-loadMore-loadingText">LOADING...</span> <span class="cbp-l-loadMore-noMoreLoading">NO MORE WORK <i class="lnr lnr-cross"></i></span> </a>                    </div>
+            </div>
+        </div>
+    </section>
+    {include file="common/photography"/}
+</div>
+{include file="common/footer"/}

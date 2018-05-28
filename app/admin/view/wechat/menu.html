@@ -1,0 +1,113 @@
+{include file="common/head"/}
+<div class="admin-main layui-anim layui-anim-upbit">
+    <fieldset class="layui-elem-field layui-field-title">
+        <legend>菜单管理</legend>
+    </fieldset>
+    <blockquote class="layui-elem-quote">
+        <a href="{:url('addMenu')}" class="layui-btn layui-btn-small">{:lang('add')}菜单</a>
+        <a  href="javascript:;" onclick="return createMenu();" class="layui-btn layui-btn-small">生成菜单</a>
+    </blockquote>
+    <table class="layui-table" id="list" lay-filter="list"></table>
+</div>
+{include file="common/foot"/}
+<script type="text/html" id="name">
+    {{d.lefthtml}}{{d.name}}
+</script>
+<script type="text/html" id="listorder">
+    <input name="{{d.id}}" data-id="{{d.id}}" class="list_order layui-input" value=" {{d.listorder}}" size="10"/>
+</script>
+<script type="text/html" id="status">
+    {{# if(d.open==1){ }}
+    <a class="layui-btn layui-btn-xs layui-btn-warm" lay-event="open">开启</a>
+    {{# }else{  }}
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="open">关闭</a>
+    {{# } }}
+</script>
+<script type="text/html" id="action">
+    <a href="{:url('editMenu')}?id={{d.id}}" class="layui-btn layui-btn-xs">编辑</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
+<script>
+    var $;
+    layui.use('table', function() {
+        var table = layui.table;
+        $ = layui.jquery;
+        var tableIn = table.render({
+            id: 'menu',
+            elem: '#list',
+            url: '{:url("menu")}',
+            method: 'post',
+            cols: [[
+                {field: 'id', title: '{:lang("id")}', width: 80, fixed: true},
+                {field: 'name', title: '主菜单名称', width: 120,templet:'#name'},
+                {field: 'type', title: '菜单类型', width: 100},
+                {field: 'open', align:'center',title: '{:lang("status")}', width: 100, toolbar: '#status'},
+                {field: 'listorder', align:'center', title: '{:lang("order")}', width: 100,toolbar:'#listorder'},
+                {field: 'value', title: '菜单操作值', width: 320},
+                {width: 160, align: 'center', toolbar: '#action',title:'操作'}
+            ]]
+        });
+        $('body').on('blur','.list_order',function() {
+            var id = $(this).attr('data-id');
+            var listorder = $(this).val();
+            var loading = layer.load(1, {shade: [0.1, '#fff']});
+            $.post('{:url("menuOrder")}',{id:id,listorder:listorder},function(res){
+                layer.close(loading);
+                if(res.code === 1){
+                    layer.msg(res.msg, {time: 1000, icon: 1});
+                    tableIn.reload();
+                }else{
+                    layer.msg(res.msg,{time:1000,icon:2});
+                }
+            })
+        });
+        table.on('tool(list)', function(obj) {
+            var data = obj.data;
+            if (obj.event === 'open') {
+                var loading = layer.load(1, {shade: [0.1, '#fff']});
+                $.post('{:url("menuState")}', {'id': data.id}, function (res) {
+                    layer.close(loading);
+                    if (res.code === 1) {
+                        if (res.open === 1) {
+                            obj.update({
+                                open: '<a class="layui-btn layui-btn-xs layui-btn-warm" lay-event="open">开启</a>'
+                            });
+                        } else {
+                            obj.update({
+                                open: '<a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="open">关闭</a>'
+                            });
+                        }
+                    } else {
+                        layer.msg('操作失败！', {time: 1000, icon: 2});
+                        return false;
+                    }
+                })
+            }else if(obj.event === 'del'){
+                layer.confirm('您确定要删除该菜单吗？', function(index){
+                    var loading = layer.load(1, {shade: [0.1, '#fff']});
+                    $.post("{:url('delMenu')}",{id:data.id},function(res){
+                        layer.close(loading);
+                        if(res.code===1){
+                            layer.msg(res.msg,{time:1000,icon:1});
+                            obj.del();
+                        }else{
+                            layer.msg('操作失败！',{time:1000,icon:2});
+                        }
+                    });
+                    layer.close(index);
+                });
+            }
+        });
+    });
+    function createMenu() {
+        $.post('{:url("createMenu")}', function(data){
+            if(data.code==1){
+                layer.alert(data.info, {icon: 6});
+            }else{
+                layer.alert(data.info, {icon: 5});
+            }
+        });
+        return false;
+    }
+
+</script>

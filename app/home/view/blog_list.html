@@ -1,0 +1,130 @@
+{include file="common/head"/}
+
+<!--======= SUB BANNER =========-->
+<section class="sub-bnr parallax-bg" data-stellar-background-ratio="0.5" style="background:url(__HOME__/images/bb4.jpg) no-repeat;">
+    <div class="container">
+        <div class="position-center-center">
+            <h3>博客资讯</h3>
+
+            <!--======= Breadcrumb =========-->
+            <ol class="breadcrumb">
+                <li><a href="/">首页</a></li>
+                <li class="active">博客资讯</li>
+            </ol>
+        </div>
+    </div>
+
+    <!-- GO DOWN -->
+    <div class="scroll"> <a href="#content" class="go-down"><img src="__HOME__/images/go-down.png" alt=""></a> </div>
+</section>
+
+<!-- Content -->
+<div id="content">
+
+    <!-- Blog -->
+    <section class="blog blog-page blog-col-2 padding-top-100 padding-bottom-100">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-9 padding-right-30">
+
+                    <!-- Row -->
+                    <div class="row">
+                        {volist name="$list" id="vo"}
+                        <!-- BLOG POST -->
+                        <div class="col-md-6">
+                            <article>
+                              <a href="{:url('home/'.$vo['controller'].'/info',array('id'=>$vo['id'],'catId'=>$vo['catid']))}" title="{$vo.title}">
+                                <img class="img-responsive" src="{$vo.title_thumb}" alt="{$vo.title}">
+                                <div class="post-info">
+                                    <div class="post-in">
+                                        <div class="extra"> <span><i class="icon-calendar"></i>{:toDate($vo['createtime'],'Y-m-d')}</span>
+                                            <span
+                                                class="margin-left-15"><i class="icon-user"></i>{$vo.zuozhe}</span> <span class="margin-left-15"><i class="icon-bubbles"></i> {:getcatname($vo['catid'])}</span></div>
+                                        <div class="tittle-post">{$vo.title}</div>
+                                        <p>
+                                            {:cutstr_html($vo['content'],120,'...')}
+                                        </p>
+                                        <div class="btn-1">阅读更多<i class="fa fa-angle-right"></i></div>                                        </div>
+                                </div>
+                              </a>
+                            </article>
+                        </div>
+                        {/volist}
+
+                    </div>
+
+                    <!-- Pagination -->
+                    <!-- <ul class="pagination">
+                        <li><a href="#">1</a></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li><a href="#">Next</a></li>
+                    </ul> -->
+                    {$page}
+                </div>
+
+                <!-- Side Bar -->
+                <div class="col-md-3">
+                    <div class="side-bar">
+
+                        <!--======= Search =========-->
+                        <div class="search">
+                            <input class="form-control" type="search" placeholder="搜索">
+                            <button type="submit"><i class="fa fa-search"></i></button>
+                        </div>
+
+                        <!--======= Categories =========-->
+                        <h5 class="side-tittle margin-top-50"> 文章分类 </h5>
+                        <hr class="main">
+                        <ul class="cate archive">
+                            {volist name="listnav" id="v"}
+                            <li><a href="{:url('/blog_'.$v['id'] )}"> {$v.catname} <span>{$v.num}</span></a></li>
+                            {/volist}
+                        </ul>
+
+                        <!--======= Papu Post =========-->
+                        <h5 class="side-tittle margin-top-50"> 热点文章</h5>
+                        <hr class="main">
+                        <ul class="papu-post margin-top-20">
+                            {clt:list_join db='blog' dbfield='catid' id='vo' joindb='category' joinfield='id' where='posid = 2
+                            ' order="listorder asc,createtime desc" limit='3'}
+                            <li class="media">
+                                <div class="media-left"> <a href="{:url('home/'.$vo['catdir'].'/info',array('id'=>$vo['id'],'catId'=>$vo['catid']))}"> <img class="media-object" src="__PUBLIC__{$vo.thumb}" alt=""></a> </div>
+                                <div class="media-body"> <a class="media-heading" href="{:url('home/'.$vo['catdir'].'/info',array('id'=>$vo['id'],'catId'=>$vo['catid']))}">{$vo.title}</a> <span>{:toDate($vo['createtime'],'Y-m-d')}</span> </div>
+                            </li>
+                            {/clt:list_join}
+                        </ul>
+                        <!--======= Archives =========-->
+                        <h5 class="side-tittle margin-top-50">时间线</h5>
+                        <hr class="main">
+                        <ul class="cate archive">
+                            <li><a href="#."> 5月 2015</a></li>
+                            <li><a href="#."> 6月 2015</a></li>
+                            <li><a href="#."> 7月 2015</a></li>
+                            <li><a href="#."> 8月 2015</a></li>
+                            <li><a href="#."> 9月 2015</a></li>
+                        </ul>
+
+                        <!--======= Popular Tags =========-->
+                        <h5 class="side-tittle margin-top-50">热门标签</h5>
+                        <hr class="main">
+                        <ul class="tags">
+                            <li><a href="#.">HTML5 </a></li>
+                            <li><a href="#.">Web前端 </a></li>
+                            <li><a href="#.">网页设计 </a></li>
+                            <li><a href="#.">手机站 </a></li>
+                            <li><a href="#.">SEO优化 </a></li>
+                            <li><a href="#.">APPS </a></li>
+                            <li><a href="#.">Jquery</a></li>
+                            <li><a href="#.">UI </a></li>
+                            <li><a href="#.">店铺装修</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    {include file="common/photography"/}
+</div>
+
+{include file="common/footer"/}

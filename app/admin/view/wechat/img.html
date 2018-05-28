@@ -1,0 +1,85 @@
+{include file="common/head"/}
+<div class="admin-main layui-anim layui-anim-upbit">
+    <fieldset class="layui-elem-field layui-field-title">
+        <legend>图文回复</legend>
+    </fieldset>
+    <blockquote class="layui-elem-quote">
+        <a href="{:url('addImg')}" class="layui-btn layui-btn-small">{:lang('add')}图文回复</a>
+    </blockquote>
+    <table class="layui-table" id="list" lay-filter="list"></table>
+</div>
+{include file="common/foot"/}
+<script type="text/html" id="action">
+    <a href="{:url('editImg')}?id={{d.id}}" class="layui-btn layui-btn-xs">编辑</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
+<script>
+    layui.use('table', function() {
+        var table = layui.table;
+        $ = layui.jquery;
+        var tableIn = table.render({
+            id: 'img',
+            elem: '#list',
+            url: '{:url("img")}',
+            method: 'post',
+            page:true,
+            cols: [[
+                {field: 'id', title: '{:lang("id")}', width: 80, fixed: true},
+                {field: 'keyword', title: '关键词', width: 120, templet: '#name'},
+                {field: 'title', title: '{:lang("title")}', width: 200, templet: '#name'},
+                {field: 'desc', title: '描述', width: 400},
+                {width: 160, align: 'center', toolbar: '#action', title: '操作'}
+            ]],
+            limit:10
+        });
+        table.on('tool(list)', function(obj) {
+            var data = obj.data;
+            if(obj.event === 'del'){
+                layer.confirm('您确定要删除该内容吗？', function(index){
+                    var loading = layer.load(1, {shade: [0.1, '#fff']});
+                    $.post("{:url('delImg')}",{id:data.id},function(res){
+                        layer.close(loading);
+                        if(res.code===1){
+                            layer.msg(res.msg,{time:1000,icon:1});
+                            tableIn.reload();
+                        }else{
+                            layer.msg('操作失败！',{time:1000,icon:2});
+                        }
+                    });
+                    layer.close(index);
+                });
+            }
+        });
+    });
+    /*layui.config({
+        base: '__ADMIN__/js/'
+    }).use(['paging', 'code','icheck','layer'], function() {
+        layui.code();
+        var paging = layui.paging(),layer = parent.layer === undefined ? layui.layer : parent.layer;
+        paging.init({
+            url: "{:url('img')}", //地址
+            elem: '#con', //内容容器
+            params: {}, //发送到服务端的参数
+            tempElem: '#conTemp', //模块容器
+            pageConfig: { //分页参数配置
+                elem: '#paged', //分页容器
+                pageSize: 15 //分页大小
+            },
+            success: function() { //渲染成功的回调
+                //alert('渲染成功');
+            },
+            fail: function(msg) { //获取数据失败的回调
+                //alert('获取数据失败')
+            },
+            complate: function() { //完成的回调
+                //alert('处理完成');
+            }
+        });
+    });
+    function del(id) {
+        layer.confirm('你确定要删除该图文回复吗？', {icon: 3}, function (index) {
+            layer.close(index);
+            window.location.href = "{:url('delImg')}?id=" + id;
+        });
+    }*/
+</script>

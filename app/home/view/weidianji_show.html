@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no">
+  <link rel="shortcut icon" type="image/x-icon" href="//res.wx.qq.com/mmbizwap/zh_CN/htmledition/images/icon/common/favicon22c41b.ico">
+  <title>{$list.title}</title>
+  <link rel="stylesheet" href="__STATIC__/wdj/css/wx.css">
+  <!--字体库连接，可以根据自己需要改动-->
+  <link rel='stylesheet prefetch' href='__STATIC__/wdj/css/foundation-icons.css'>
+  <link rel="stylesheet" href="__STATIC__/wdj/css/nav.css">
+</head>
+
+<body id="activity-detail" class="zh_CN mm_appmsg">
+  <div id="js_article" class="rich_media">
+    <div id="js_top_ad_area" class="top_banner"></div>
+    <div class="rich_media_inner">
+      <div id="page-content" class="rich_media_area_primary">
+        <div id="img-content">
+          <h2 class="rich_media_title" id="activity-name">{$list.title}</h2>
+          <div id="meta_content" class="rich_media_meta_list">
+            <em id="post-date" class="rich_media_meta rich_media_meta_text">{:toDate($list['ct'],'Y-m-d')}</em>
+            <a class="rich_media_meta rich_media_meta_link rich_media_meta_nickname" href="##" id="post-user">{$list.nickname}</a>
+            <span class="rich_media_meta rich_media_meta_text rich_media_meta_nickname">{$list.nickname}</span>
+          </div>
+        </div>
+        <div class="rich_media_content " id="js_content">{$list.content}</div>
+      </div>
+    </div>
+  </div>
+  <div class="clearfix"></div>
+  <div class="ad-position bottom">
+    <img src="{:imgUrl($config['adpic'])}" alt="">
+  </div>
+  <div class="center menu" >
+    <div id="myMenu"></div>
+  </div>
+  <style>
+  .center.menu{ bottom:70px!important; }
+  </style>
+  <script src="__STATIC__/wdj/lib/jquery-2.1.4.js"></script>
+  <script src="__STATIC__/wdj/lib/fastclick.js"></script>
+  <script src="__STATIC__/wdj/js/jquery-ui.min.js"></script>
+  <script src='__STATIC__/wdj/js/anime.js'></script>
+  <script src="__STATIC__/wdj/js/nav.js"></script>
+
+  <script>
+    $(document).ready(function () {
+      var picheight = $('.ad-position').height();
+      $('#js_article').css('padding-bottom', picheight + 'px');
+      var menu = new Menu("#myMenu");
+
+      var item1 = new Item("list");
+
+      var item2 = new Item("torso", "#FF5C5C", '<?php echo $config["url"];?>');
+
+      var item3 = new Item("telephone", "#5CD1FF", 'tel:<?php echo $config["tel"];?>');
+
+      var item4 = new Item("link", "#64F592", '<?php echo $config["url"];?>');
+
+
+      menu.add(item1);
+      menu.add(item2);
+      menu.add(item3);
+      menu.add(item4);
+
+      $(document).delay(50).queue(function (next) {
+        menu.open();
+        //console.log(next);
+        next();
+        $(document).delay(1000).queue(function (next) {
+          menu.close();
+          next();
+        });
+        $('.menu .item').click(function () {
+          var url = $(this).attr('data-url');
+          if (url) {
+            location.href = url;
+          }
+        });
+      });
+    });
+  </script>
+  <script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+  <script>
+    wx.config({
+      debug: false,
+      appId: '<?php echo $signPackage["appId"];?>',
+      timestamp: <?php echo $signPackage["timestamp"];?>,
+      nonceStr: '<?php echo $signPackage["nonceStr"];?>',
+      signature: '<?php echo $signPackage["signature"];?>',
+      jsApiList: [
+        // 所有要调用的 API 都要加到这个列表中
+        'checkJsApi',
+        'openLocation',
+        'getLocation',
+        'onMenuShareTimeline',
+        'onMenuShareAppMessage'
+      ]
+    });
+    wx.ready(function () {
+      wx.onMenuShareAppMessage({
+        title: '<?php echo $list["title"];?>',
+        desc: '<?php echo $list["msg_desc"];?>',
+        link: '<?php echo $signPackage["url"];?>',
+        imgUrl: '<?php echo "http://".$_SERVER["HTTP_HOST"].$list["cover"];?>',
+        type: '',
+        success: function (res) {
+          alert('已分享');
+        },
+        cancel: function (res) {
+          alert('已取消');
+        },
+        fail: function (res) {
+          alert(JSON.stringify(res));
+        }
+      });
+
+      wx.onMenuShareTimeline({
+        title: '<?php echo $list["title"];?>',
+        desc: '<?php echo $list["msg_desc"];?>',
+        link: '<?php echo $signPackage["url"];?>',
+        imgUrl: '<?php echo "http://".$_SERVER["HTTP_HOST"].$list["cover"];?>',
+        type: '',
+        success: function (res) {
+          alert('已分享');
+        },
+        cancel: function (res) {
+          alert('已取消');
+        },
+        fail: function (res) {
+          alert(JSON.stringify(res));
+        }
+      });
+
+    });
+  </script>
+</body>
+
+</html>

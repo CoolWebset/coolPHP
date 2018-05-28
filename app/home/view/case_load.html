@@ -1,0 +1,20 @@
+{if condition="$list"}
+{volist name="$list" id="vo"}
+<div class="cbp-item item portfolio-item w{$vo.catid}">
+    <div class="port-item"><img src="__PUBLIC__{$vo.thumb}" alt="">
+        <div class="hover-info">
+            <div class="hover-in">
+                <div class="position-center-center"><span>{:getcatname($vo['catid'])}</span>
+                    <hr>
+                    <h6>{$vo.title}</h6>
+                    <a class="cbp-singlePage" href="{:url('home/'.$vo['catdir'].'/info',array('id'=>$vo['id'],'catId'=>$vo['catid']))}">
+                        <i class="lnr lnr-link"></i>
+                    </a>                                     
+                    <a href="__PUBLIC__{$vo.thumb}" class="cbp-lightbox"><i class="lnr lnr-frame-expand"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{/volist}
+{else/}null{/if}

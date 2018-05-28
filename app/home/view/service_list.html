@@ -1,0 +1,88 @@
+{include file="common/head"/}
+
+<section class="sub-bnr parallax-bg" data-stellar-background-ratio="0.5" style="background:url(__HOME__/images/bb1.jpg) no-repeat;">
+    <div class="container">
+        <div class="position-center-center">
+            <h3>服务中心</h3>
+
+            <!--======= Breadcrumb =========-->
+            <ol class="breadcrumb">
+                <li><a href="index.html">首页</a></li>
+                <li class="active">服务中心</li>
+            </ol>
+        </div>
+    </div>
+
+    <!-- GO DOWN -->
+    <div class="scroll"><a href="#content" class="go-down"><img src="__HOME__/images/go-down.png" alt=""></a></div>
+</section>
+
+<!-- Content -->
+<div id="content">
+
+    <!-- Welcome -->
+    <section class="padding-top-100 padding-bottom-100">
+        <div class="container">
+
+            <!-- Heading -->
+            <div class="heading text-center"><span>OUR SERVICES</span>
+                <h4>我们提供最好的服务</h4>
+                <hr>
+                <p>
+                    完善实用的售后服务标准，行业服务标准的倡导者。<br>全心全意做服务，一点一滴为客户。
+                </p>
+            </div>
+
+            <!-- SERVICES -->
+            <div class="services">
+                <ul class="row">
+                    {volist name="$list" id="vo"}
+                    <!-- SERVICES -->
+                    <li class="col-md-3">
+                        <article>
+                            <h6>{$vo.title}</h6>
+                            <hr> {$vo.content}
+                            <i class="lnr {$vo.tubiao}"></i></article>
+                    </li>
+                    {/volist}
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonial -->
+    <section class="testimonial padding-top-150 padding-bottom-100" style="background:url(__HOME__/images/testi-bg.jpg) repeat-y;background-size:100%;"
+        data-stellar-background-ratio="0.1">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+
+                    <!-- Test Slider -->
+                    <div class="testi">
+                        <div class="two-slider">
+                            {clt:list_join db='fuwukehu' dbfield='catid' id='vo' joindb='category' joinfield='id' where='catid=22
+                            ' order="listorder asc,createtime desc" limit='10'}
+                            <!-- Slider 1 -->
+                            <div class="in-testi">
+
+                                <!-- Avatars -->
+                                <div class="avatars"><img src="__PUBLIC__{$vo.thumb}" alt=""></div>
+                                <div class="testi-name"><i class="fa fa-quote-left"></i>
+                                    <h5>{$vo.title}&nbsp;&nbsp;&nbsp;{$vo.zhiwei}</h5>
+                                    {$vo.content}
+                                </div>
+                                <span>{$vo.xingming}</span>
+                            </div>
+
+                            <!-- Slider 1 -->
+
+                            {/clt:list_join}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    {include file="common/photography"/}
+</div>
+{include file="common/footer"/}

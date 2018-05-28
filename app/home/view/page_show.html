@@ -1,0 +1,268 @@
+{include file="common/head"/}
+<!--======= SUB BANNER =========-->
+<section class="sub-bnr parallax-bg" data-stellar-background-ratio="0.5" style="background:url(__HOME__/images/slide-4.jpg) no-repeat;">
+    <div class="container">
+        <div class="position-center-center">
+            <h3> Hello! 我们是酷创网络</h3>
+            <p class="font-lora">“全力以赴，互促共生”</p>
+        </div>
+    </div>
+
+    <!-- GO DOWN -->
+    <div class="scroll"><a href="#content" class="go-down"><img src="__HOME__/images/go-down.png" alt=""></a></div>
+</section>
+
+<!-- Content -->
+<div id="content">
+
+
+    <!-- Our Story -->
+    <section class="story padding-top-100 padding-bottom-100">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8">
+                    <!-- Heading -->
+                    <div class="heading text-left margin-bottom-40 margin-top-20">
+                        <h4>关于我们</h4>
+                        <hr> {$info.content}
+                    </div>
+                    <div>
+
+                        <!-- Tab -->
+                        <ul class="tabs margin-top-20 margin-bottom-30" role="tablist">
+                            {clt:list db='debris' id='list' limit="3" key="i" where="type_id = 6"} {if condition="$i eq 0"}
+                            <li role="presentation" class="active">
+                                {else/}
+                                <li role="presentation">
+                                    {/if}
+                                    <a href="#retina{$i}" aria-controls="home" role="tab" data-toggle="tab">
+                                     {if condition="$i eq 0"}
+                                    <i class="icon-phone"></i>
+                                    {elseif condition="$i eq 1"/}
+                                    <i class="icon-tools-2"></i>
+                                    {else/}
+                                    <i class="icon-tools"></i>
+                                     {/if}
+                                    0{$i+1}. {$list.title}
+                                </a>
+                                </li>
+                                {/clt:list}
+                        </ul>
+
+                        <!-- Tab panes -->
+                        <div class="tab-content">
+                            {clt:list db='debris' id='list' limit="3" key="i" where="type_id = 6"} {if condition="$i eq 0"}
+                            <div role="tabpanel" class="tab-pane fade in active" id="retina{$i}">
+                                {$list.content}
+                            </div>
+                            {else/}
+                            <div role="tabpanel" class="tab-pane fade" id="retina{$i}">
+                                {$list.content}
+                            </div>
+                            {/if} {/clt:list}
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Story Img -->
+                <div class="col-md-4">
+                    <div class="single-slide">
+                        {clt:list db='debris' id='list' limit="3" key="i" where="type_id = 7"}
+                        <div>{$list.content}</div>
+                        {/clt:list}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section class="light-gray-bg  padding-top-100 padding-bottom-100">
+        <div class="container">
+
+            <!-- Heading -->
+            <div class="heading text-center"><span>OUR SERVICES</span>
+                <h4>我们能做的最好</h4>
+                <hr>
+                <p>
+                    我们的价值不是完成数量的积累，而是品质的展现，长久的合作
+                </p>
+            </div>
+
+            <!-- SERVICES WHAT WE OFFERS -->
+            <div class="we-offer">
+                <ul class="row">
+
+                    <!-- Branding -->
+                    <li class="col-md-4">
+                        <div class="media-left">
+                            <div class="icon"><i class="icon-tools"></i></div>
+                        </div>
+                        <div class="media-body">
+                            <h6>一对一定制</h6>
+                            <hr>
+                            <p>
+                                根据客户行业需求，制定专属网页风格，突出企业竞争优势，效果图修改致客户满意。
+                            </p>
+                        </div>
+                    </li>
+
+                    <!-- Web Designing -->
+                    <li class="col-md-4">
+                        <div class="media-left">
+                            <div class="icon"><i class="icon-laptop"></i></div>
+                        </div>
+                        <div class="media-body">
+                            <h6>专业编程</h6>
+                            <hr>
+                            <p>
+                                根据不同页面需求，人工进行代码编写，确保网站运行流畅，后台操作简单易管理
+                            </p>
+                        </div>
+                    </li>
+
+                    <!-- Development -->
+                    <li class="col-md-4">
+                        <div class="media-left">
+                            <div class="icon"><i class="lnr lnr-rocket"></i></div>
+                        </div>
+                        <div class="media-body">
+                            <h6>功能开发</h6>
+                            <hr>
+                            <p>
+                                根据客户需求，定制开发周边功能，专业开发团队将设计开发一站式服务。
+                            </p>
+                        </div>
+                    </li>
+
+                    <!-- Digital Marketing -->
+                    <li class="col-md-4">
+                        <div class="media-left">
+                            <div class="icon"><i class="icon-streetsign"></i></div>
+                        </div>
+                        <div class="media-body">
+                            <h6>技术多样 展现丰富</h6>
+                            <hr>
+                            <p>
+                                通过多种技术展现形式。让网页展现的丰富多彩又不失高端大气时尚。
+                            </p>
+                        </div>
+                    </li>
+
+                    <!-- Web Analtics -->
+                    <li class="col-md-4">
+                        <div class="media-left">
+                            <div class="icon"><i class="icon-linegraph"></i></div>
+                        </div>
+                        <div class="media-body">
+                            <h6>实体化公司</h6>
+                            <hr>
+                            <p>
+                                实体化公司，专业团队，多年行业经验。签单、制作、售后，全程服务让您放心满意。
+                            </p>
+                        </div>
+                    </li>
+
+                    <!-- Visual Graphic -->
+                    <li class="col-md-4">
+                        <div class="media-left">
+                            <div class="icon"><i class="lnr lnr-screen"></i></div>
+                        </div>
+                        <div class="media-body">
+                            <h6>合约明细</h6>
+                            <hr>
+                            <p>
+                                明细化合约。我们保证，只要是我们承诺的，100%实现，说到必做。
+                            </p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- FACTS -->
+    <section class="facts parallax-bg padding-top-100 padding-bottom-70" data-stellar-background-ratio="0.8">
+        <div class="container">
+            <div class="row">
+                <!-- Team Member -->
+                <div class="col-md-3 margin-bottom-30">
+                    <div class="fats-conter"><span class="number"> <span class="timer" data-speed="2000"
+                                                                             data-refresh-interval="100" data-to="35"
+                                                                             data-from="0">2980 <i
+                                class="icon-anchor"></i></span> </span>
+                        <h5>小时的工作时间</h5>
+                        <hr>
+                    </div>
+                </div>
+
+                <!-- Line Of Codes -->
+                <div class="col-md-3 margin-bottom-30">
+                    <div class="fats-conter"><span class="number"> <span class="timer" data-speed="2000"
+                                                                             data-refresh-interval="100" data-to="5225"
+                                                                             data-from="0">1280 <i
+                                class="icon-pencil"></i></span> </span>
+                        <h5>行代码构成网站</h5>
+                        <hr>
+                    </div>
+                </div>
+
+                <!-- Satisfied Client -->
+                <div class="col-md-3  margin-bottom-30">
+                    <div class="fats-conter"><span class="number"> <span class="timer" data-speed="2000"
+                                                                             data-refresh-interval="100" data-to="4977"
+                                                                             data-from="0">750<i class="icon-heart"></i></span>                        </span>
+                        <h5>项目给我们认可</h5>
+                        <hr>
+                    </div>
+                </div>
+
+                <!-- PSD file included -->
+                <div class="col-md-3 margin-bottom-30">
+                    <div class="fats-conter"><span class="number"> <span class="timer" data-speed="2000"
+                                                                             data-refresh-interval="100" data-to="178"
+                                                                             data-from="0">520<i class="icon-bike"></i></span>                        </span>
+                        <h5>杯咖啡陪我们熬夜</h5>
+                        <hr>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CLIENTS -->
+    <section class="light-gray-bg padding-bottom-100 padding-top-100">
+        <div class="container">
+
+            <!-- Heading -->
+            <div class="heading text-center "><span>OUR CLIENTS</span>
+                <h4>我们合作的客户</h4>
+                <hr>
+                <p class="margin-top-30">“客户满意就是我们的一切!曈新科技期待与您携手共创辉煌未来!”</p>
+            </div>
+
+            <!-- CLIENTS -->
+            <div class="clients-img">
+                <ul class="row">
+                    {clt:list db='ad' id='list' limit="999" key="i" where="type_id = 10"}
+                    {if condition="$i > 5"}
+                        {if condition="$list['url'] eq '#.'"}
+                        <li style="margin-top:30px;"><a href="javascript:void(0);"> <img src="__PUBLIC__{$list.pic}" class="img-responsive" alt=""> </a></li>
+                        {else/}
+                        <li style="margin-top:30px;"><a href="{$list.url}" target="_blank"> <img src="__PUBLIC__{$list.pic}" class="img-responsive" alt=""> </a></li>
+                        {/if}
+                    {else/}
+                        {if condition="$list['url'] eq '#.'"}
+                        <li><a href="javascript:void(0);"> <img src="__PUBLIC__{$list.pic}" class="img-responsive" alt=""> </a></li>
+                        {else/}
+                        <li><a href="{$list.url}" target="_blank"> <img src="__PUBLIC__{$list.pic}" class="img-responsive" alt=""> </a></li>
+                        {/if}
+                    {/if}
+                    {/clt:list}
+                </ul>
+            </div>
+        </div>
+    </section>
+    {include file="common/photography"/}
+</div>
+{include file="common/footer"/}

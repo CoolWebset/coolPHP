@@ -1,0 +1,126 @@
+{include file="common/head"/}
+<div class="admin-main layui-anim layui-anim-upbit">
+    <fieldset class="layui-elem-field layui-field-title">
+        <legend>权限{:lang('list')}</legend>
+    </fieldset>
+    <blockquote class="layui-elem-quote">
+        <a href="{:url('ruleAdd')}" class="layui-btn layui-btn-small">{:lang('add')}权限</a>
+    </blockquote>
+    <table class="layui-table" id="list" lay-filter="list"></table>
+</div>
+<script type="text/html" id="auth">
+    {{# if(d.authopen==1){ }}
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="authopen">无需验证</a>
+    {{# }else{  }}
+    <a class="layui-btn layui-btn-warm layui-btn-xs" lay-event="authopen">需要验证</a>
+    {{# } }}
+</script>
+<script type="text/html" id="status">
+    {{# if(d.menustatus==1){ }}
+    <a class="layui-btn layui-btn-xs layui-btn-warm" lay-event="menustatus">显示状态</a>
+    {{# }else{  }}
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="menustatus">隐藏状态</a>
+    {{# } }}
+</script>
+<script type="text/html" id="order">
+    <input name="{{d.id}}" data-id="{{d.id}}" class="list_order layui-input" value=" {{d.sort}}" size="10"/>
+</script>
+<script type="text/html" id="icon">
+    <span class="icon {{d.icon}}"></span>
+</script>
+<script type="text/html" id="action">
+    <a href="{:url('ruleEdit')}?id={{d.id}}" class="layui-btn layui-btn-xs">{:lang('edit')}</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">{:lang('del')}</a>
+</script>
+{include file="common/foot"/}
+<script>
+    layui.use('table', function() {
+        var table = layui.table, $ = layui.jquery;
+        table.render({
+            elem: '#list',
+            url: '{:url("adminRule")}',
+            method: 'post',
+            cols: [[
+                {field: 'id', title: '{:lang("id")}', width: 70, fixed: true},
+                {field: 'icon', align: 'center',title: '{:lang("icon")}', width: 60,templet: '#icon'},
+                {field: 'ltitle', title: '权限名称', width: 200},
+                {field: 'href', title: '控制器/方法', width: 200},
+                {field: 'authopen',align: 'center', title: '是否验证权限', width: 150,toolbar: '#auth'},
+                {field: 'menustatus',align: 'center',title: '菜单{:lang("status")}', width: 150,toolbar: '#status'},
+                {field: 'sort',align: 'center', title: '{:lang("order")}', width: 80, templet: '#order'},
+                {width: 160,align: 'center', toolbar: '#action'}
+            ]]
+        });
+        table.on('tool(list)', function(obj){
+            var data = obj.data;
+            if(obj.event === 'authopen'){
+                loading =layer.load(1, {shade: [0.1,'#fff']});
+                $.post('{:url("ruleTz")}',{'id': data.id},function (res) {
+                    layer.close(loading);
+                    if (res.status==1) {
+                        if (res.authopen == 1) {
+                            obj.update({
+                                authopen: '<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="authopen">无需验证</a>'
+                            });
+                        } else {
+                            obj.update({
+                                authopen: '<a class="layui-btn layui-btn-warm layui-btn-xs" lay-event="authopen">需要验证</a>'
+                            });
+                        }
+                    }else{
+                        layer.msg('操作失败！',{time:1000,icon:2});
+                        return false;
+                    }
+                })
+            }
+            else if(obj.event === 'menustatus'){
+                loading =layer.load(1, {shade: [0.1,'#fff']});
+                $.post('{:url("ruleState")}',{'id': data.id},function (res) {
+                    layer.close(loading);
+                    if (res.status==1) {
+                        if (res.menustatus == 1) {
+                            obj.update({
+                                menustatus: '<a class="layui-btn layui-btn-warm layui-btn-xs" lay-event="menustatus">显示状态</a>'
+                            });
+                        } else {
+                            obj.update({
+                                menustatus: '<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="menustatus">隐藏状态</a>'
+                            });
+                        }
+                    }else{
+                        layer.msg('操作失败！',{time:1000,icon:2});
+                        return false;
+                    }
+                })
+            }
+            else if(obj.event === 'del'){
+                layer.confirm('您确定要删除该记录吗？', function(index){
+                    var loading = layer.load(1, {shade: [0.1, '#fff']});
+                    $.post("{:url('ruleDel')}",{id:data.id},function(res){
+                        layer.close(loading);
+                        if(res.code==1){
+                            layer.msg(res.msg,{time:1000,icon:1});
+                            obj.del();
+                        }else{
+                            layer.msg(res.msg,{time:1000,icon:2});
+                        }
+                    });
+                    layer.close(index);
+                });
+            }
+        });
+        $('body').on('blur','.list_order',function() {
+           var id = $(this).attr('data-id');
+           var sort = $(this).val();
+           $.post('{:url("ruleOrder")}',{id:id,sort:sort},function(res){
+                if(res.code==1){
+                    layer.msg(res.msg,{time:1000,icon:1},function(){
+                        location.href = res.url;
+                    });
+                }else{
+                    layer.msg(res.msg,{time:1000,icon:2});
+                }
+           })
+        })
+    })
+</script>
