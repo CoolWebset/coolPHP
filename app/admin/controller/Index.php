@@ -17,10 +17,19 @@ class Index extends Common
         //导航
         // 获取缓存数据
         $authRule = cache('authRule');
+        $aid = session('aid');
+        $gid = db('admin')->field('group_id')->find($aid);
+
+        $rules = db('auth_group')->field('rules')->find($gid['group_id']);
+        $rules = rtrim($rules['rules']);
+        $rulesarray = explode(',',$rules);
+        // dump($rules);
         if (!$authRule) {
-            $authRule = db('auth_rule')->where('menustatus=1')->order('sort asc,pid asc')->select();
-            // dump($authRule);exit;
-            cache('authRule', $authRule, 3600);
+            $authRule = db('auth_rule')->where('menustatus',1)->where('id','in',$rules)->order('sort asc,pid asc')->fetchSql(false)->select();
+            // $authRule = db('auth_rule')->where('menustatus',1)->order('sort asc,pid asc')->fetchSql(false)->select();
+             // dump($authRule);exit;
+            $path = '/r'.session('gid').'/';
+            cache($path.'authRule', $authRule, 3600);
         }
 
         foreach ($authRule as $key=>$val) {

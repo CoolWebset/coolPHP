@@ -25,6 +25,7 @@ function callback($status = 0, $msg = '', $url = null, $data = '')
 // 快速文件数据读取和保存 针对简单类型数据 字符串、数组
 function F($name, $value='', $path=DATA_PATH)
 {
+    $path = DATA_PATH.'/r'.session('gid').'/';
     static $_cache = array();
     $filename   =   $path.$name.'.php';
     if ('' !== $value) {
@@ -56,6 +57,7 @@ function F($name, $value='', $path=DATA_PATH)
 //缓存
 function savecache($name = '', $id='')
 {
+
     if ($name=='Field') {
         if ($id) {
             $Model = db($name);
@@ -869,4 +871,3 @@ function send_email($to, $subject='', $content='')
       $alltext = preg_replace("/[ ]+/s", " ", $alltext);
       return $alltext;
   }
-  
