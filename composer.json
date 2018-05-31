@@ -11,6 +11,7 @@
         "topthink/framework": "5.0.11",
         "topthink/think-captcha": "1.0.7",
         "5ini99/think-addons": "2.0.0",
-        "phpmailer/phpmailer": "5.2.14"
+        "phpmailer/phpmailer": "5.2.14",
+        "aferrandini/phpqrcode": "^1.0"
     }
 }
