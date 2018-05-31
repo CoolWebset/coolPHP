@@ -22,6 +22,7 @@ class Addons extends Common
           $pageSize =input('limit')?input('limit'):config('pageSize');
           $list = $this -> getDir(ADDONS_PATH);
           $count = count($list);
+          // dump($list);
           foreach ($list as $key => $value) {
             $class          =   get_addon_class($value);
             if(!class_exists($class)){
@@ -116,6 +117,18 @@ class Addons extends Common
           return $result;
           exit;
       }
+    }
+    public function getqr()
+    {
+      // $url = Input('url');
+      // $name = rand(10,100)
+      // define('imgurl', APP_PATH."../public/uploads/qrcode_".$name.".png");
+      // \PHPQRCode\QRcode::png($url,imgurl, 'L', 4, 2);
+      // $result['msg'] = '插件安装成功!';
+      // $result['url'] = $name;
+      // $result['code'] = 1;
+      // return $result;
+      // exit;
     }
     /**
      * 卸载程序

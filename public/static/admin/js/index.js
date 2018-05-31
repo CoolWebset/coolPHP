@@ -61,7 +61,8 @@ layui.config({
   //渲染navbar
   topbar.render();
   topbar.on('click(topnav)', function(data) {
-    // console.log(data.field.datajson);
+    console.log(data.field.datajson);
+    // tab.tabAdd(data.field);
     navbar.set({
       spreadOne: true,
       elem: '#admin-navbar-side',
@@ -84,6 +85,7 @@ layui.config({
   navbar.render();
   //监听点击事件
   navbar.on('click(side)', function(data) {
+    console.log(data);
     tab.tabAdd(data.field);
   });
   //清除缓存

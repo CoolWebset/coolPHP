@@ -19,7 +19,7 @@ class System extends Common
                 return json(array('code' => 0, 'msg' =>'站点设置保存失败！'));
             }
         }else{
-            $system = $table->field('id,name,url,title,key,des,bah,copyright,ads,tel,email,logo')->find($sys_id);
+            $system = $table->field('id,name,url,title,key,des,bah,copyright,ads,bscads,tel,email,logo')->find($sys_id);
             $this->assign('system', $system);
             return $this->fetch();
         }

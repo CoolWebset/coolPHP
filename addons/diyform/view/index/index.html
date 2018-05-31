@@ -1,1 +1,71 @@
-<p>我是temp2插件的exec模板</p>
+{include file="index/common_header"/}
+  <main>
+    <article class="meet" data-main="meet">
+      <section class="main-container business index-inner">
+        <div class="meet_ban">
+          <img src="__HOME__/img/meet_1.jpg" alt="">
+        </div>
+        <div class="meet_tab">
+          <a href="/addons_execute_diyform-index-index.html" class="on">客房预订</a><a href="/addons_execute_diyform-index-meet.html">会议预订</a>
+        </div>
+        <div class="met_main">
+          <dl>
+            <dt>
+              <i class="fa fa-user-circle-o"></i><span>预订人信息</span>
+            </dt>
+            <dd>
+              <label for="name">您的姓名</label>
+              <input id="name" type="text" name="" value="" placeholder="您的姓名">
+            </dd>
+            <dd>
+              <label for="tel">您的手机</label>
+              <input id="tel" type="text" name="" value="" placeholder="您的手机">
+            </dd>
+          </dl>
+          <dl>
+            <dt>
+              <i class="fa fa-calendar"></i><span>入驻信息</span>
+            </dt>
+            <dd>
+              <label for="in_time">入驻日期</label>
+              <input id="in_time" type="text" name="" value="" placeholder="请选择入驻日期">
+            </dd>
+            <dd>
+              <label for="meet_out_timegodate">退房日期</label>
+              <input id="out_time" type="text" name="" value="" placeholder="请选择退房日期">
+            </dd>
+            <dd>
+              <label for="children_num">房间数量</label>
+              <input id="room_num" type="text" onkeyup="value=value.replace(/[^\d]/g,'')" name="" value="" placeholder="房间数量">
+            </dd>
+            <dd>
+              <label for="adult_num">成人人数</label>
+              <input id="adult_num" type="text" onkeyup="value=value.replace(/[^\d]/g,'')" name="" value="" placeholder="成人人数">
+            </dd>
+            <dd>
+              <label for="children_num">儿童人数（12岁以下）</label>
+              <input id="children_num" type="text" onkeyup="value=value.replace(/[^\d]/g,'')" name="" value="" placeholder="儿童人数">
+            </dd>
+          </dl>
+          <dl>
+            <dt>
+              <i class="fa fa-exclamation-circle"></i><span>备注</span>
+            </dt>
+            <dd>
+              <textarea name="" id="content" cols="30" rows="10" placeholder="请输入备注信息"></textarea>
+            </dd>
+          </dl>
+          <div class="meet_wz">
+            <h2>温馨提示</h2>
+            <p>信息提交后，我们会尽快联系您。您也可以直接拨打电话0451-53989898进行询问。</p>
+            <button type="submit" id="kfydsubmit" class="btn btn-primary">提交</button>
+          </div>
+        </div>
+      </section>
+    </article>
+  </main>
+  <script src="__HOME__/js/bundle.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="ru">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+  <link rel="icon" type="image/png" href="favicon/favicon.png">
+  <link rel="stylesheet" href="css/style.bundle.css">
+  <title>
+    首页
+  </title>
+</head>
+
+<body>
+  <div id="progress">
+    <span></span>
+  </div>
+  <!-- 弹窗 -->
+  <div class="alert_player" style="display:none;">
+    <div class="bg"></div>
+    <div class="layer">
+      <div class="info"></div>
+      <a class="queren_btn" data-ajax="no">确认</a>
+    </div>
+  </div>
+  <!-- 弹窗 -->
+
+  <main>
+    <article class="meet" data-main="meet">
+      <section class="main-container business index-inner">
+        <div class="meet_ban">
+          <img src="img/meet_1.jpg" alt="">
+        </div>
+        <div class="met_main">
+          <dl>
+            <dt>
+              <i class="fa fa-user-circle-o"></i><span>预订人信息</span>
+            </dt>
+            <dd>
+              <label for="meet_name">您的姓名</label>
+              <input id="meet_name" type="text" name="" value="" placeholder="您的姓名">
+            </dd>
+            <dd>
+              <label for="meet_phone">您的手机</label>
+              <input id="meet_phone" type="text" name="" value="" placeholder="您的手机">
+            </dd>
+          </dl>
+          <dl>
+            <dt>
+              <i class="fa fa-calendar"></i><span>入驻信息</span>
+            </dt>
+            <dd>
+              <label for="meet_indate">入驻日期</label>
+              <input id="meet_indate" type="text" name="" value="" placeholder="请选择入驻日期">
+            </dd>
+            <dd>
+              <label for="meet_godate">退房日期</label>
+              <input id="meet_godate" type="text" name="" value="" placeholder="请选择退房日期">
+            </dd>
+            <dd>
+              <label for="meet_roomnum">房间数量</label>
+              <input id="meet_roomnum" type="text" onkeyup="value=value.replace(/[^\d]/g,'')" name="" value="" placeholder="房间数量">
+            </dd>
+            <dd>
+              <label for="meet_peo">成人人数</label>
+              <input id="meet_peo" type="text" onkeyup="value=value.replace(/[^\d]/g,'')" name="" value="" placeholder="成人人数">
+            </dd>
+            <dd>
+              <label for="meet_child">儿童人数（12岁以下）</label>
+              <input id="meet_child" type="text" onkeyup="value=value.replace(/[^\d]/g,'')" name="" value="" placeholder="儿童人数">
+            </dd>
+          </dl>
+          <dl>
+            <dt>
+              <i class="fa fa-exclamation-circle"></i><span>备注</span>
+            </dt>
+            <dd>
+              <textarea name="" id="" cols="30" rows="10" placeholder="请输入备注信息"></textarea>
+            </dd>
+          </dl>
+          <div class="meet_wz">
+            <h2>温馨提示</h2>
+            <p>信息提交后，我们会尽快联系您。您也可以直接拨打电话0451-53989898进行询问。</p>
+            <button type="submit" class="btn btn-primary">提交</button>
+          </div>
+        </div>
+      </section>
+    </article>
+  </main>
+  <script src="js/bundle.js"></script>
+
+</body>
+
+</html>

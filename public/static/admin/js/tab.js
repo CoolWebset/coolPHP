@@ -152,7 +152,7 @@ layui.define(['element', 'common'], function (exports) {
                         var flag = _config.closeBefore({
                             title: data.title,
                             url: data.href,
-                            id: globalTabIdIndex,
+                            // id: globalTabIdIndex,
                             tabId: tabId
                         });
                         if (flag) {

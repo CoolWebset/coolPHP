@@ -135,7 +135,15 @@ class App
         } elseif (!is_null($data)) {
             // 默认自动识别响应输出类型
             $isAjax   = $request->isAjax();
-            $type     = $isAjax ? Config::get('default_ajax_return') : Config::get('default_return_type');
+            $isPjax = $request->isPjax();
+            $type = Config::get('default_return_type');
+            // $type     = $isAjax ? Config::get('default_ajax_return') : Config::get('default_return_type');
+            if ($isAjax) {
+                $type = Config::get('default_ajax_return');
+            }
+            if ($isPjax) {
+                $type = Config::get('default_pjax_return');
+            }
             $response = Response::create($data, $type);
         } else {
             $response = Response::create();

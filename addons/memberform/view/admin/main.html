@@ -1,0 +1,164 @@
+{include file="common/head"/}
+<style>
+.layui-elem-field {
+    border: 1px solid #F5F5F5;
+}
+</style>
+<div class="admin-main layui-anim layui-anim-upbit">
+  <div class="layui-row">
+    <div class="layui-col-xs12 layui-col-md12">
+      <div class="grid-demo">
+        <fieldset class="layui-elem-field" style="margin-top: 20px;">
+          <legend>会员统计</legend>
+          <div class="layui-row" style="margin: 20px 0;">
+            <div class="layui-col-md6">
+              <div class="grid-demo grid-fk-bg2">
+                <div class="layui-col-md4">
+                  <div class="ico" style="font-size:1.5em;width: 3em;height: 1em;  padding: 1em 0; ">会员</div>
+                </div>
+                <div class="layui-col-md8">
+                  <div class="num timer" id="pv" data-to="{$kfnum}" data-speed="1500" data-decimals="10">0</div>
+                  <div class="title">今日会员数</div>
+                </div>
+              </div>
+            </div>
+            <div class="layui-col-md6">
+              <div class="grid-demo grid-fk-bg1">
+                <div class="layui-col-md4">
+                  <div class="ico" style="font-size:1.5em;width: 3em;height: 1em;  padding: 1em 0; ">会员</div>
+                </div>
+                <div class="layui-col-md8">
+                  <div class="num timer" id="uv" data-to="{$hynum}" data-speed="1500">0</div>
+                  <div class="title">总会员数</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </fieldset>
+      </div>
+    </div>
+    <div class="layui-col-xs12 layui-col-md12">
+      <div class="grid-demo" style="margin:20px;">
+        <div id="main" style="width: 100%;height:400px; padding-top:12px;"></div>
+      </div>
+    </div>
+  </div>
+
+
+
+</div>
+{include file="common/foot"/}
+<script>
+  layui.use('table', function() {
+    var table = layui.table;
+  })
+  layui.use(['countTo'], function(countTo) {
+    countTo.init();
+  });
+  layui.use('element', function() {
+    var $ = layui.jquery,
+      element = layui.element; //Tab的切换功能，切换事件监听等，需要依赖element模块
+
+    //触发事件
+    var active = {
+      setPercent: function() {
+        //设置50%进度
+        element.progress('demo', '50%')
+      },
+      loading: function(othis) {
+        var DISABLED = 'layui-btn-disabled';
+        if (othis.hasClass(DISABLED)) return;
+
+        //模拟loading
+        var n = 0,
+          timer = setInterval(function() {
+            n = n + Math.random() * 10 | 0;
+            if (n > 100) {
+              n = 100;
+              clearInterval(timer);
+              othis.removeClass(DISABLED);
+            }
+            element.progress('demo', n + '%');
+          }, 300 + Math.random() * 1000);
+
+        othis.addClass(DISABLED);
+      }
+    };
+
+    $('.site-demo-active').on('click', function() {
+      var othis = $(this),
+        type = $(this).data('type');
+      active[type] ? active[type].call(this, othis) : '';
+    });
+
+    $.get("/admin/index/seo", function(result){
+      $('#alexa_num').html(result.alexa_num);
+      $('#alexa_area_num').html(result.alexa_area_num);
+      $('#baidu_count').html(result.baidu_count);
+      $('#baidu_fl_count').html(result.baidu_fl_count);
+      $('#sogou_count').html(result.sogou_count);
+      $('#haosou360_count').html(result.haosou360_count);
+    },'json');
+  });
+</script>
+<script type="text/javascript" src="__STATIC__/plugins/echarts/echarts.js"></script>
+<script type="text/javascript" src="__STATIC__/plugins/echarts/westeros.js"></script>
+<script type="text/javascript">
+  // 基于准备好的dom，初始化echarts实例
+  var myChart = echarts.init(document.getElementById('main'));
+
+  // 指定图表的配置项和数据
+  var option = {
+    title: {
+      text: '预订概况'
+    },
+    tooltip: {
+      trigger: 'axis'
+    },
+    color:['#62df62'],
+    legend: {
+      data: ['uv'],
+    },
+    grid: {
+      left: '2%',
+      right: '3.8%',
+      bottom: '0',
+      containLabel: true
+    },
+
+    xAxis: {
+      type: 'category',
+      boundaryGap: false,
+      data: [{$riqistr}]
+    },
+    yAxis: {
+      type: 'value'
+    },
+    series: [{
+        name: '客房',
+        type: 'line',
+        stack: '总量',
+        smooth :true,
+        animation :true,
+        itemStyle : {
+          normal : {
+            lineStyle:{
+              color:'#62df62'
+            }
+          }
+        },
+        data: [{$uvstr}]
+      }
+    ]
+  };
+
+  // 使用刚指定的配置项和数据显示图表。
+  myChart.setOption(option);
+  window.onresize = function() {
+    //重置容器高宽
+    myChart.resize();
+  };
+</script>
+</body>
+
+</html>

@@ -144,15 +144,24 @@ layui.define(['element', 'common'], function(exports) {
             var $a = $(this).children('a');
             var id = $a.data('id');
             var title = $a.children('cite').text();
+
+            var $a = $(this).children('a');
+            var href = $a.data('url');
+
+            var icon = $a.children('i:first').data('icon');
+            var title = $a.children('cite').text();
             $.getJSON("/admin/index/getleftnav/topid/" + id, function(result) {
+
               var data = {
                 elem: $a,
                 field: {
                   id: id,
+                  href: href,
                   title: title,
                   datajson:result
                 }
               };
+              console.log(data);
               callback(data);
             });
           });
@@ -191,7 +200,8 @@ layui.define(['element', 'common'], function(exports) {
       } else {
         ulHtml += '<li class="layui-nav-item">';
       }
-      ulHtml += '<a href="javascript:;" data-id="' + data[i].id + '" >';
+      console.log(data[i]);
+      ulHtml += '<a href="javascript:;" data-id="' + data[i].id + '" data-url="/admin/' + data[i].href + '" >';
       ulHtml += '<cite>' + data[i].title + '</cite>'
       ulHtml += '</a>';
       ulHtml += '</li>';

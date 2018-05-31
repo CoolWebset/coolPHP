@@ -1,0 +1,90 @@
+{include file="common/header"/}
+  <main>
+    <article class="activity" data-main="activity">
+      <section class="main-container business index-inner">
+        <div class="i_ban swiper-container">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide"><img src="__HOME__/img/ban1.jpg" alt=""></div>
+          </div>
+          <!-- Add Pagination -->
+          <div class="swiper-pagination"></div>
+        </div>
+        <div class="container-fluid hd_jj">
+          <div class="row i_about pad_up">
+            <div class="col-md-12">
+              <div class="i_intro_bt">
+                <img src="__HOME__/img/w3.png" alt="">
+              </div>
+              <div class="i_intro_wz">
+                {:getcontent(51)}
+              </div>
+              <div class="hd_lb">
+                <div class="i_ban swiper-container">
+                  <div class="swiper-wrapper">
+                    {clt:list_join db='jdjjtu' dbfield='catid' id='vo' joindb='category' joinfield='id' where="" order="listorder asc,createtime desc" limit='4'}
+                    <div class="swiper-slide"><img src="{:imgUrl($vo['thumb'],__HOME__.'/images/portfolio-thumb/p'.$k.'.jpg')}" alt=""></div>
+                    {/clt:list_join}
+                  </div>
+                  <!-- Add Pagination -->
+                  <div class="swiper-fy">
+                    <div class="swiper-button-prev swiper-button-white"><i class="fa fa-long-arrow-left"></i></div>
+                    <div class="swiper-button-next swiper-button-white"><i class="fa fa-long-arrow-right"></i></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="container-fluid hd_ser">
+          <div class="row">
+            <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
+              <h2>THE ELEQANCE OF THE ROOM</h2>
+              <h1>房间设施</h1>
+              <div class="row hd_room">
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                  <p><i class="fa fa-shower"></i></p>
+                  <p><span>淋浴</span></p>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                  <p><i class="fa fa-tv"></i></p>
+                  <p><span>电视</span></p>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                  <p><i class="fa fa-wifi"></i></p>
+                  <p><span>wi-fi</span></p>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                  <p><i class="fa fa-cutlery"></i></p>
+                  <p><span>供餐</span></p>
+                </div>
+              </div>
+              <div class="row hd_room">
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                  <p><i class="fa fa-coffee"></i></p>
+                  <p><span>咖啡</span></p>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                  <p><i class="fa fa-tv"></i></p>
+                  <p><span>电视</span></p>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                  <p><i class="fa fa-wifi"></i></p>
+                  <p><span>wi-fi</span></p>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                  <p><i class="fa fa-cutlery"></i></p>
+                  <p><span>供餐</span></p>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12 bg">
+              <div class="hd_bg">
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </article>
+  </main>
+{include file="common/footer"/}

@@ -57,14 +57,14 @@ class EmptyController extends Common{
                 }
                 $this->assign('list',$list['data']);
                 $this->assign('page',$page);
-            }elseif(DBNAME=='case'){
-                $listnav = db('category')->where(array('parentid'=>10))->field(['id','catname'])->select();
+            }elseif(DBNAME=='picture'){
+                $listnav = db('category')->where(array('parentid'=>46))->field(['id','catname','catdir'])->select();
                 foreach($listnav as $k=>$v){
-                    $listnav[$k]['num']= db('blog')->where(array('catid'=>$v['id']))->count();
+                    $listnav[$k]['num']= db('picture')->where(array('catid'=>$v['id']))->count();
                     $str .=','.$v['id'];
                 }
                 $this->assign('listnav',$listnav);
-                $map ='catid in('.substr($str,1).')';
+                // $map ='catid in('.substr($str,1).')';
                 $list=$this->dao->alias('a')
                 ->join(config('database.prefix').'category c','a.catid = c.id','left')
                 ->field('a.*,c.catdir')->where( $map )
@@ -150,6 +150,31 @@ class EmptyController extends Common{
         return $this->fetch($template);
     }
     public function load(){
+      $thumbgroup = db('picture')->field('thumbgroup')->where('id',input('id'))->find();
+      // $info = $this->dao->where('id',input('id'))->find();
+      $thumbgroup = substr($thumbgroup['thumbgroup'], 0, -1);
+      $thumbgrouparry = explode(';',$thumbgroup);
+      foreach ($thumbgrouparry as $key => $value) {
+        $thumbgrouparry[$key] = '/public'.$value;
+      }
+      // dump($thumbgrouparry);
+      return json(['data'=>$thumbgrouparry,'code'=>1,'message'=>'操作完成']);
+        // $listnav = db('category')->where(array('parentid'=>10))->field(['id','catname'])->select();
+        // foreach($listnav as $k=>$v){
+        //     $listnav[$k]['num']= db('blog')->where(array('catid'=>$v['id']))->count();
+        //     $str .=','.$v['id'];
+        // }
+        // $map ='catid in('.substr($str,1).')';
+        // $list=db('case')->where($map)->paginate(8);
+        // //echo db('case')->getlastsql();exit;
+        // $page = $list->render();
+        // $list = $list->toArray();
+        // $this->assign('page',$page);
+        // $this->assign('list',$list['data']);
+        // return $this->fetch('case_load');
+    }
+
+    public function page(){
         $listnav = db('category')->where(array('parentid'=>10))->field(['id','catname'])->select();
         foreach($listnav as $k=>$v){
             $listnav[$k]['num']= db('blog')->where(array('catid'=>$v['id']))->count();
@@ -164,12 +189,5 @@ class EmptyController extends Common{
         $this->assign('list',$list['data']);
         return $this->fetch('case_load');
     }
-    public function senMsg(){
-        $data = input('post.');
-        $data['addtime'] = time();
-        $data['ip'] = getIp();
-        db('message')->insert($data);
-        $result['status'] = 1;
-        return $result;
-    }
+    
 }

@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="zh-cn">
+
+<head>
+  <meta charset="utf-8">
+  <title>{if condition="$info['title']"}{$info.title}{elseif condition="$title" /}{$title}{else}{$sys.title}{/if}</title>
+  <meta name="keywords" content="{if condition="$info['keywords']"}{$info.keywords}{elseif condition="$keywords" /}{$keywords}{else}{$sys.key}{/if}" />
+  <meta name="description" content="{if condition="$info['description']"}{$info.description}{elseif condition="$description" /}{$description}{else}{$sys.des}{/if}" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+  <link rel="icon" type="image/png" href="__HOME__/favicon/favicon.png">
+  <link rel="stylesheet" href="__HOME__/css/style.bundle.css">
+</head>
+
+<body>
+  <div id="progress">
+    <span></span>
+  </div>
+  <!-- 弹窗 -->
+  <div class="alert_player" style="display:none;">
+    <div class="bg"></div>
+    <div class="layer">
+      <div class="info"></div>
+      <a class="queren_btn" data-ajax="no">确认</a>
+    </div>
+  </div>
+  <!-- 弹窗 -->
+
+  <input type="checkbox" id="myInput">
+
+
+  <header>
+    <div class="top pc">
+      <div class="container">
+        <div class="row">
+          <p class="col-md-12">
+            <span><i class="fa fa-phone"></i>&nbsp;&nbsp;{$sys.tel}</span>
+            <a href="#">更多信息</a><i class="fa fa-question-circle-o"></i>
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="logo col-md-4 col-sm-4 col-xs-3" id="logo_h">
+          <img src="__PUBLIC__{$sys.logo}" />
+        </div>
+        <nav class="col-md-6 nav_b col-sm-6 col-xs-7">
+          <ul class="nav nav-pills">
+            <li role="presentation"><a class="on" href="/">首页</a></li>
+            <li role="presentation"><a href="/activity.html">活动</a></li>
+            <li role="presentation"><a href="/" data-target="my">我们</a></li>
+          </ul>
+        </nav>
+        <div class="yd_b col-md-1 col-sm-1 col-xs-1">
+          <a href="book.html" class="btn">预订</a>
+        </div>
+        <label for="myInput" class=" myInput fr">
+        <div class="menu wap">
+          <div class="bar"></div>
+          <div class="bar"></div>
+          <div class="bar"> </div>
+        </div>
+      </label>
+      </div>
+    </div>
+  </header>

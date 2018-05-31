@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="zh-cn">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+  <link rel="icon" type="image/png" href="__HOME__/favicon/favicon.png">
+  <link rel="stylesheet" href="__HOME__/css/style.bundle.css">
+  <title>
+    发票
+  </title>
+</head>
+
+<body>
+  <div id="progress">
+    <span></span>
+  </div>
+  <!-- 弹窗 -->
+  <div class="alert_player" style="display:none;">
+    <div class="bg"></div>
+    <div class="layer">
+      <div class="info"></div>
+      <a class="queren_btn" data-ajax="no">确认</a>
+    </div>
+  </div>
+  <!-- 弹窗 -->
+
+  <main>
+    <article class="invoice" data-main="invoice">
+      <section class="main-container business index-inner">
+        <div class="met_main">
+          <dl>
+            <!-- <dt>
+              <i class="fa fa-user-circle-o"></i><span>预订人信息</span>
+              </dt> -->
+            <dd>
+              <div class="col-xs-6 radio-label">
+                <input id="type1" type="radio" name="type" value="1" checked >
+                <label for="type1"><span class="fa fa-square-o"></span>增专票</label>
+              </div>
+              <div class="col-xs-6 radio-label">
+                <input id="type2" type="radio" name="type" value="2" >
+                <label for="type2"><span class="fa fa-square-o"></span>增普票</label>
+              </div>
+            </dd>
+            <dd>
+              <label for="title">名称</label>
+              <input id="title" type="text" name="" value="" placeholder="请填写准确的抬头名称">
+            </dd>
+            <dd class="radio-change">
+              <label for="name">默认抬头</label>
+              <input type="checkbox" name="mrtt" id="mrtt" value="">
+              <label for="mrtt" class="radio">
+                  <span></span>
+              </label>
+            </dd>
+          </dl>
+        </div>
+        <div class="met_main">
+          <dl>
+            <dd>
+              <label for="shuihao">税号</label>
+              <input id="shuihao" type="text" name="" value="" style="width: 300px;" placeholder="纳税人识别号或统一社会信用代码">
+            </dd>
+            <dd>
+              <label for="address">单位地址</label>
+              <input id="address" type="text" name="" value="" placeholder="收票单位注册地址">
+            </dd>
+            <dd>
+              <label for="tel">电话号码</label>
+              <input id="tel" type="text" name="" value="" placeholder="输入公司电话号码">
+            </dd>
+            <dd>
+              <label for="khyh">开户银行</label>
+              <input id="khyh" type="text" name="" value="" placeholder="收票单位开户银行">
+            </dd>
+            <dd>
+              <label for="yhzh">银行账号</label>
+              <input id="yhzh" type="text" name="" value="" placeholder="收票单位银行账号">
+            </dd>
+            <dd>
+              <span class="info">
+                  建议全部填写，以便开具增值税专用发票
+                </span>
+            </dd>
+          </dl>
+        </div>
+        <div class="met_main">
+          <div class="content">
+            <dl>
+              <dd>
+                <br/> 温馨提示：
+                <br/>
+                <br/> 1.增专票：为增值税“专用”发票
+                <br/> 2.增普票：为增值税“普通”发票
+              </dd>
+              <dd><button type="submit" id="fpsubmit" class="btn btn-primary">提交</button></dd>
+            </dl>
+          </div>
+        </div>
+      </section>
+    </article>
+  </main>
+  <script src="__HOME__/js/bundle.js"></script>
+
+</body>
+
+</html>

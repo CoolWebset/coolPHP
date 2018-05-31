@@ -21,29 +21,16 @@ return [
     ],
 
     'index' => 'home/index/index',
-
-    'news/:catId' => 'home/news/index',
-    'newsInfo/:id/:catId' => 'home/news/info',
-
-    'products/:catId' => 'home/products/index',
-    'products/:id/:catId' => 'home/products/info',
-
-    'case/:catId' => 'home/case/index',
+    'book' => 'home/index/book',
+    'vip'=>'home/index/vip',
+    'activity' => 'home/index/activity',
+    'picture/:catId' => 'home/picture/index',
     'caseInfo/:id/:catId' => 'home/case/info',
     'caseload' => 'home/case/load',
-
-    'blog/:catId' => 'home/blog/index',
-    'blogInfo/:id/:catId' => 'home/blog/info',
-
     'about/:catId' => 'home/about/index',
+    'service/:catId' => 'home/service/index',
+    'activity/:catId' => 'home/activity/index',
 
-    'services/:catId' => 'home/services/index',
-    'servicesInfo/:id/:catId' => 'home/services/info',
-
-    'contact/:catId' => 'home/contact/index',
-    'weidianji/' => 'home/weidianji/index',
-    'weidianji/dourl' => 'home/weidianji/dourl',
-    'weidianjishow/:id' => 'home/weidianji/show',
     'datastatistics/' => 'home/datastatistics/index',
     'datastatistics/dostatistics' => 'home/datastatistics/dostatistics',
 ];

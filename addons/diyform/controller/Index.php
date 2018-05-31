@@ -17,7 +17,29 @@ class Index extends Controller
 {
     public function index()
     {
-        echo '<p>我是temp2插件中Index控制器的index方法</p>';
+        // echo '<p>我是temp2插件中Index控制器的index方法</p>';
         return $this->fetch();
+    }
+    public function meet()
+    {
+        // echo '<p>我是temp2插件中Index控制器的index方法</p>';
+        return $this->fetch();
+    }
+    public function sendbook(){
+        $data = input('post.');
+        if($data['intime']){
+          $data['intime'] = strtotime($data['intime']);
+        }
+        if($data['outtime']){
+          $data['outtime'] = strtotime($data['outtime']);
+        }
+        if($data['partytime']){
+          $data['partytime'] = strtotime($data['partytime']);
+        }
+        $data['addtime'] = time();
+        $data['ip'] = getIp();
+        db('diyform')->insert($data);
+        $result['status'] = 1;
+        return $result;
     }
 }

@@ -1,88 +1,72 @@
-{include file="common/head"/}
-
-<section class="sub-bnr parallax-bg" data-stellar-background-ratio="0.5" style="background:url(__HOME__/images/bb1.jpg) no-repeat;">
-    <div class="container">
-        <div class="position-center-center">
-            <h3>服务中心</h3>
-
-            <!--======= Breadcrumb =========-->
-            <ol class="breadcrumb">
-                <li><a href="index.html">首页</a></li>
-                <li class="active">服务中心</li>
-            </ol>
+{include file="common/header"/}
+  <main>
+    <article class="conference" data-main="conference">
+      <section class="main-container business index-inner">
+        <div class="i_ban swiper-container">
+          <div class="swiper-wrapper">
+            {clt:list_join db='banner' dbfield='catid' id='vo' joindb='category' joinfield='id' where="catid = 58" order="listorder asc,createtime desc" limit='1'}
+            <div class="swiper-slide"><img src="{:imgUrl($vo['thumb'],__HOME__.'/images/portfolio-thumb/p'.$k.'.jpg')}" alt=""></div>
+            {/clt:list_join}
+          </div>
+          <!-- Add Pagination -->
+          <div class="swiper-pagination"></div>
         </div>
-    </div>
-
-    <!-- GO DOWN -->
-    <div class="scroll"><a href="#content" class="go-down"><img src="__HOME__/images/go-down.png" alt=""></a></div>
-</section>
-
-<!-- Content -->
-<div id="content">
-
-    <!-- Welcome -->
-    <section class="padding-top-100 padding-bottom-100">
-        <div class="container">
-
-            <!-- Heading -->
-            <div class="heading text-center"><span>OUR SERVICES</span>
-                <h4>我们提供最好的服务</h4>
-                <hr>
-                <p>
-                    完善实用的售后服务标准，行业服务标准的倡导者。<br>全心全意做服务，一点一滴为客户。
-                </p>
-            </div>
-
-            <!-- SERVICES -->
-            <div class="services">
-                <ul class="row">
-                    {volist name="$list" id="vo"}
-                    <!-- SERVICES -->
-                    <li class="col-md-3">
-                        <article>
-                            <h6>{$vo.title}</h6>
-                            <hr> {$vo.content}
-                            <i class="lnr {$vo.tubiao}"></i></article>
-                    </li>
-                    {/volist}
-                </ul>
-            </div>
+        <div class="confer_h container-fluid">
+          YBL BROADCAST INTERNATIONAL HOTEL
         </div>
-    </section>
-
-    <!-- Testimonial -->
-    <section class="testimonial padding-top-150 padding-bottom-100" style="background:url(__HOME__/images/testi-bg.jpg) repeat-y;background-size:100%;"
-        data-stellar-background-ratio="0.1">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-
-                    <!-- Test Slider -->
-                    <div class="testi">
-                        <div class="two-slider">
-                            {clt:list_join db='fuwukehu' dbfield='catid' id='vo' joindb='category' joinfield='id' where='catid=22
-                            ' order="listorder asc,createtime desc" limit='10'}
-                            <!-- Slider 1 -->
-                            <div class="in-testi">
-
-                                <!-- Avatars -->
-                                <div class="avatars"><img src="__PUBLIC__{$vo.thumb}" alt=""></div>
-                                <div class="testi-name"><i class="fa fa-quote-left"></i>
-                                    <h5>{$vo.title}&nbsp;&nbsp;&nbsp;{$vo.zhiwei}</h5>
-                                    {$vo.content}
-                                </div>
-                                <span>{$vo.xingming}</span>
-                            </div>
-
-                            <!-- Slider 1 -->
-
-                            {/clt:list_join}
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="container confer_hy">
+          <h2><span>会议服务</span></h2>
+          <div class="i_video_bt">
+            <img src="__HOME__/img/w4.png" alt="">
+          </div>
+          <p>
+            酒店拥有7种不同类型的议场地，并配备专业多媒体设备，可承接贵宾 接待、高层会议、学术报告会、发布会、年会、内训团建等活动及会议，满足您的<br> 各类需求，其中白桦厅可为做为演播大厅，实况转播会议现场。
+          </p>
         </div>
-    </section>
-    {include file="common/photography"/}
-</div>
+        <div class="container-fluid confer_main">
+          {volist name="list" id="vo"}
+          <div class="row">
+            <div class="col-md-4 col-sm-12 col-xs-12 confer_main_l" style="background-image: url({:imgUrl($vo.thumb)});">
+            </div>
+            <div class="col-md-8  col-sm-12 col-xs-12 confer_main_r">
+              <div class="confer_main_rl">
+                <dl>
+                  <dt>
+                        <h3><span>会议厅名称：{$vo.title}</span></h3>
+                      </dt>
+                  <dd>
+                    <h4>基本信息</h4>
+                    <table>
+                      <tr>
+                        <td>面积：{$vo.mianji}</td>
+                        <td>长/宽/高：{$vo.ckg}</td>
+                        <td>楼层：{$vo.lc}</td>
+                      </tr>
+                      <tr>
+                        <td colspan="2">描述：{$vo.miaoshu}</td>
+                        <td>布局信息：{$vo.buju}</td>
+                      </tr>
+                    </table>
+                  </dd>
+                  <dd>
+                    <h4>设备特色</h4>
+                    <table>
+                      <tr>
+                        <td>免费设备：{$vo.mfsb}</td>
+                      </tr>
+                      <tr>
+                        <td>会议厅特色：{$vo.hytts}</td>
+                      </tr>
+                    </table>
+                  </dd>
+
+                </dl>
+              </div>
+            </div>
+          </div>
+          {/volist}
+        </div>
+      </section>
+    </article>
+  </main>
 {include file="common/footer"/}

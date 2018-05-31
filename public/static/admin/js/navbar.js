@@ -228,10 +228,10 @@ layui.define(['element', 'common'], function(exports) {
           ulHtml += '<dd title="' + data[i].children[j].title + '">';
           ulHtml += '<a href="javascript:;" data-url="' + data[i].children[j].href + '">';
           if (data[i].children[j].icon !== undefined && data[i].children[j].icon !== '') {
-            if (data[i].children[j].icon.indexOf('fa-') !== -1) {
-              ulHtml += '<i class="fa ' + data[i].children[j].icon + '" data-icon="' + data[i].children[j].icon + '" aria-hidden="true"></i>';
-            } else {
+            if (data[i].children[j].icon) {
               ulHtml += '<i class="layui-icon" data-icon="' + data[i].children[j].icon + '">' + data[i].children[j].icon + '</i>';
+            } else {
+
             }
           }
           ulHtml += '<cite>' + data[i].children[j].title + '</cite>';

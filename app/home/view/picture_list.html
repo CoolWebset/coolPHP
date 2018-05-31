@@ -1,0 +1,80 @@
+{include file="common/header"/}
+  <main>
+    <article class="picture" data-main="picture">
+      <section class="main-container business ">
+        <div class="i_ban swiper-container">
+          <div class="swiper-wrapper">
+            {clt:list_join db='banner' dbfield='catid' id='vo' joindb='category' joinfield='id' where="catid = 43" order="listorder asc,createtime desc" limit='4'}
+            <div class="swiper-slide"><img src="{:imgUrl($vo['thumb'],__HOME__.'/images/portfolio-thumb/p'.$k.'.jpg')}" alt=""></div>
+            {/clt:list_join}
+          </div>
+          <!-- Add Pagination -->
+          <div class="swiper-pagination"></div>
+        </div>
+        <div class="container picture-inner">
+          <ul class="nav nav-pills nav-justified ">
+            {volist name="listnav" id="vo" key="i"}
+              {if condition="$i eq 1"}
+                <li class="active"><a href="{:url('home/'.$vo['catdir'].'/index',['catId'=>$vo['id']] )}" data-istop="no" data-container="picture-inner .row" data-fragment="picture-inner .row">{$vo.catname}</a></li>
+              {else}
+                <li><a data-container="picture-inner .row" data-fragment="picture-inner .row" href="{:url('home/'.$vo['catdir'].'/index',['catId'=>$vo['id']] )}" data-istop="no">{$vo.catname}</a></li>
+              {/if}
+            {/volist}
+          </ul>
+          <div class="row">
+            {volist name="list" id="vo"}
+            <div class="item col-lg-4 col-md-6 col-sm-6 col-xs-12" data-id="{$vo.id}">
+              <div class="inner"><img src="__HOME__/img/pic1.jpg" alt=""></div>
+            </div>
+            {/volist}
+          </div>
+        </div>
+      </section>
+      <div class="pic-show wh-center">
+        <div class="close">
+          <span></span><span></span>
+        </div>
+        <div class="pic-content col-lg-6">
+          <div class="pc-slide">
+            <div class="view">
+              <div class="swiper-container">
+                <a class="arrow-left" href="#"></a>
+                <a class="arrow-right" href="#"></a>
+                <div class="swiper-wrapper">
+                  <div class="swiper-slide"><img src="__HOME__/img/895x488.png" alt=""></div>
+                </div>
+              </div>
+            </div>
+            <div class="preview">
+              <a class="arrow-left" href="#"></a>
+              <a class="arrow-right" href="#"></a>
+              <div class="swiper-container">
+                <div class="swiper-wrapper">
+                  <div class="swiper-slide active-nav">
+                    <img src="__HOME__/img/895x488.png" alt="">
+                  </div>
+                  <div class="swiper-slide active-nav">
+                    <img src="__HOME__/img/895x488.png" alt="">
+                  </div>
+                  <div class="swiper-slide active-nav">
+                    <img src="__HOME__/img/895x488.png" alt="">
+                  </div>
+                  <div class="swiper-slide active-nav">
+                    <img src="__HOME__/img/895x488.png" alt="">
+                  </div>
+                  <div class="swiper-slide active-nav">
+                    <img src="__HOME__/img/895x488.png" alt="">
+                  </div>
+                  <div class="swiper-slide active-nav">
+                    <img src="__HOME__/img/895x488.png" alt="">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </article>
+  </main>
+{include file="common/footer"/}
